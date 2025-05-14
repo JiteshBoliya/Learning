@@ -1,1 +1,35 @@
-<p>login works!</p>
+<!-- <div class="container">
+      <div class="login-container">
+            <h2 class="login-title">Login</h2>
+            <hr>
+            <form class="login-form">
+                  <label for="username">Username</label>
+                  <input type="text" placeholder="Username" name="username">
+
+                  <label for="username">Password</label>
+                  <input type="password" placeholder="Password" name="password">
+
+                  <input type="button" value="Submit" (click)="onSubmit()">
+            </form>
+      </div>
+</div> -->
+
+<div class="login-container">
+      <div class="login-card">
+            <h2 class="login-title">Login</h2>
+            <form>
+                  <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required class="form-input" />
+                  </div>
+                  <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required class="form-input" />
+                  </div>
+                  <div class="form-group">
+                        <button type="button" class="login-button" (click)="onSubmit()">Login</button>
+                  </div>
+
+            </form>
+      </div>
+</div>

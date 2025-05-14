@@ -1,1 +1,21 @@
-<p>add-school works!</p>
+<div class="add-school-card">
+      <h2 class="add-school-title">Add School</h2>
+      <form>
+            <div class="form-grid">
+                  <div class="form-group"> <label for="name">Name</label> <input type="text" id="name" name="name"
+                              required class="form-input" /> </div>
+                  <div class="form-group"> <label for="address">Address</label> <textarea id="address" name="address"
+                              class="form-input"></textarea> </div>
+                  <div class="form-group"> <label for="email">Email</label> <input type="email" id="email" name="email"
+                              required class="form-input" /> </div>
+                  <div class="form-group"> <label for="contactNo">Contact No</label> <input type="text" id="contactNo"
+                              name="contactNo" required class="form-input" /> </div>
+                  <div class="form-group"> <label for="username">Username</label> <input type="text" id="username"
+                              name="username" required class="form-input" /> </div>
+                  <div class="form-group"> <label for="password">Password</label> <input type="password" id="password"
+                              name="password" required class="form-input" /> </div>
+            </div>
+            <div class="form-actions"> <button type="submit" class="add-school-button add">Add</button> <button
+                        type="button" class="add-school-button close" (click)="onCancel()">Close</button> </div>
+      </form>
+</div>
