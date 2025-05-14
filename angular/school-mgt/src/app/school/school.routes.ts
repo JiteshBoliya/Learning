@@ -12,8 +12,8 @@ const routes: Routes = [
             pathMatch: 'full'
       },
       { path: 'student-list', component: StudentListComponent },
-      { path: 'add-div', component: AddDivComponent },
-      { path: 'add-student', component: AddStudentComponent },
+      // { path: 'add-div', component: AddDivComponent },
+      // { path: 'add-student', component: AddStudentComponent },
       { path: 'student-detail', component: StudentDetailsComponent },
       {
             path: 'transfer',

@@ -1,1 +1,28 @@
-<p>student-list works!</p>
+<div class="dashboard-container">
+      <header class="dashboard-header">
+            <h1 class="title">Dashboard</h1>
+
+            <div class="button-container">
+                  <button class="add-button">+ Add
+                        Div</button>
+                  <button class="add-button">+ Add
+                        Student</button>
+            </div>
+      </header>
+      <table class="dashboard-table">
+            <thead>
+                  <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Div</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <tr *ngFor="let student of students">
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.div }}</td>
+                  </tr>
+            </tbody>
+      </table>
+</div>

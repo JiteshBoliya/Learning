@@ -1,6 +1,7 @@
 <div class="dashboard-container">
       <header class="dashboard-header">
-            <h1 class="title">Dashboard</h1> <button class="add-button" (click)="openAddSchoolDialog()">+ Add</button>
+            <h1 class="title">Dashboard</h1> <button class="add-button" (click)="openAddSchoolDialog()">+ Add
+                  School</button>
       </header>
       <table class="dashboard-table">
             <thead>
@@ -14,13 +15,13 @@
                   </tr>
             </thead>
             <tbody>
-                  <tr *ngFor="let item of schools">
-                        <td>{{ item.id }}</td>
-                        <td>{{ item.name }}</td>
-                        <td>{{ item.address }}</td>
-                        <td>{{ item.contactNo }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.username }}</td>
+                  <tr *ngFor="let school of schools">
+                        <td>{{ school.id }}</td>
+                        <td>{{ school.name }}</td>
+                        <td>{{ school.address }}</td>
+                        <td>{{ school.contactNo }}</td>
+                        <td>{{ school.email }}</td>
+                        <td>{{ school.username }}</td>
                   </tr>
             </tbody>
       </table>
