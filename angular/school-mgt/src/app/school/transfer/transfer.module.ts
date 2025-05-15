@@ -7,6 +7,7 @@ import { TransferRoutingModule } from './transfer.routes';
 import { MaterialModule } from '../../material.module';
 import { TransferComponent } from './transfer.component';
 import { SharedModule } from '../../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -21,7 +22,9 @@ import { SharedModule } from '../../shared/shared.module';
     CommonModule,
     TransferRoutingModule,
     MaterialModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ], exports: [
     AddRequestComponent
   ]

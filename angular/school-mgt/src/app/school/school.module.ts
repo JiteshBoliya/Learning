@@ -8,6 +8,7 @@ import { TransferModule } from './transfer/transfer.module';
 import { SchoolRoutingModule } from './school.routes';
 import { SharedModule } from '../shared/shared.module';
 import { SchoolComponent } from './school.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -22,7 +23,9 @@ import { SchoolComponent } from './school.component';
     MaterialModule,
     TransferModule,
     SchoolRoutingModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class SchoolModule { }

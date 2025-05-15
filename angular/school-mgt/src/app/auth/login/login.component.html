@@ -17,14 +17,16 @@
 <div class="login-container">
       <div class="login-card">
             <h2 class="login-title">Login</h2>
-            <form>
-                  <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required class="form-input" />
+            <form [formGroup]="loginForm">
+                  <div class=" form-group">
+                        <label for="username">Username</label>
+                        <input type="username" formControlName="username" id="username" name="username" required
+                              class="form-input" />
                   </div>
                   <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" id="password" name="password" required class="form-input" />
+                        <input type="password" formControlName="password" id="password" name="password" required
+                              class="form-input" />
                   </div>
                   <div class="form-group">
                         <button type="button" class="login-button" (click)="onSubmit()">Login</button>

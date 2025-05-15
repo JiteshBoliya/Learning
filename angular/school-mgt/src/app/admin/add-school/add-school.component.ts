@@ -16,18 +16,19 @@ export class AddSchoolComponent {
     private fb: FormBuilder
   ) {
     this.schoolForm = this.fb.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
       address: ['', Validators.required],
       contactNo: [null, [Validators.required, Validators.pattern(/^\d{10}$/)]],
       email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
+      password: ['', Validators.required],
     });
   }
 
   onSubmit() {
     if (this.schoolForm.valid) {
       this.dialogRef.close(this.schoolForm.value);
+      console.log('------------', this.schoolForm.value);
     }
   }
 
