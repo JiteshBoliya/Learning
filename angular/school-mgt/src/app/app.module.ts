@@ -7,7 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-
+import { MaterialModule } from './material.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -19,9 +20,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    MaterialModule,
     AdminModule,
     SchoolModule,
-    AuthModule
+    AuthModule,
+    SharedModule
   ],
   bootstrap: [AppComponent]
 })

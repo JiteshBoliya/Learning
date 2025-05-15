@@ -11,7 +11,7 @@ export class LoginComponent {
   constructor(private router: Router) { }
   onSubmit() {
     // If user is admin then
-    this.router.navigate(['admin']);
+    this.router.navigate(['school']);
 
     // If user is school then
     // this.router.navigate(['school']);

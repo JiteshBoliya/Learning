@@ -1,0 +1,22 @@
+.dashboard-container {
+      padding: 20px;
+      font-family: Arial, sans-serif;
+}
+
+.dashboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+}
+
+.dashboard-table th {
+      background-color: #e0e0e0; // light gray
+      color: #333;
+}

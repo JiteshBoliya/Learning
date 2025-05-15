@@ -1,1 +1,28 @@
-<p>request-list works!</p>
+<div class="dashboard-container">
+      <table class="dashboard-table">
+            <thead>
+                  <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Student name</th>
+                        <th>Student Div</th>
+                        <th>Transfer to school</th>
+                        <th>Status</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <tr *ngFor="let req of requestData">
+                        <td>{{ req.id }}</td>
+                        <td>{{ req.date }}</td>
+                        <td>{{ req.studentName }}</td>
+                        <td>{{ req.studentDiv }}</td>
+                        <td>{{ req.transferToSchool }}</td>
+                        <td class="status">
+                              <div class="chip">
+                                    <div class="chip-content">{{ req.status }}</div>
+                              </div>
+                        </td>
+                  </tr>
+            </tbody>
+      </table>
+</div>

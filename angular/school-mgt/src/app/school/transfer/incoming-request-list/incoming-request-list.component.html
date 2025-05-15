@@ -1,1 +1,25 @@
-<p>incoming-request-list works!</p>
+<div class="dashboard-container">
+      <table class="dashboard-table">
+            <thead>
+                  <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Student name</th>
+                        <th>School name</th>
+                        <th>Action</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  <tr *ngFor="let req of incomingTransferRequest">
+                        <td>{{ req.id }}</td>
+                        <td>{{ req.date }}</td>
+                        <td>{{ req.studentName }}</td>
+                        <td>{{ req.schoolName }}</td>
+                        <td>
+                              <button mat-mini-fab><mat-icon>check</mat-icon></button>
+                              <button mat-mini-fab><mat-icon>close</mat-icon></button>
+                        </td>
+                  </tr>
+            </tbody>
+      </table>
+</div>

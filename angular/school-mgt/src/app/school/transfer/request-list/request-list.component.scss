@@ -1,0 +1,144 @@
+.header {
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      // padding: 12px 24px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-container {
+      margin: 20px;
+      border: 2px solid #d1d1d1;
+      padding: 10px;
+      border-radius: 10px;
+}
+
+.header-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+}
+
+.menu {
+      display: flex;
+      gap: 20px;
+}
+
+.menu a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      padding: 6px 12px;
+}
+
+.menu a:hover {
+      background-color: #ccc;
+      border-radius: 4px;
+}
+
+.header-buttons button {
+      margin-left: 12px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #555;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+}
+
+.header-buttons button:hover {
+      background-color: #333;
+}
+
+.header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+}
+
+.dashboard-container {
+      font-family: Arial, sans-serif;
+}
+
+.dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+}
+
+.title {
+      color: #2e7d32; // dark green
+      font-size: 24px;
+      margin: 0;
+}
+
+.button-container {
+      width: 230px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.add-button {
+      background-color: #66bb6a; // medium green
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+            background-color: #388e3c; // darker green     
+      }
+}
+
+.dashboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+}
+
+.dashboard-table th {
+      background-color: #e0e0e0; // light gray
+      color: #333;
+}
+
+.chip {
+      display: inline-flex;
+      flex-direction: row;
+      background-color: #e5e5e5;
+      border: none;
+      cursor: default;
+      height: 36px;
+      outline: none;
+      padding: 0;
+      font-size: 14px;
+      color: #333333;
+      font-family: "Open Sans", sans-serif;
+      white-space: nowrap;
+      align-items: center;
+      border-radius: 16px;
+      vertical-align: middle;
+      text-decoration: none;
+      justify-content: center;
+}
+
+.chip-content {
+      cursor: inherit;
+      display: flex;
+      align-items: center;
+      user-select: none;
+      white-space: nowrap;
+      padding-left: 12px;
+      padding-right: 12px;
+}

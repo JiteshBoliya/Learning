@@ -1,1 +1,14 @@
-<p>add-student works!</p>
+<div class="add-student-card">
+      <h2 class="add-student-title">Add Student</h2>
+      <form>
+            <div class="form-group"> <label for="name">Name</label> <input type="text" id="name" name="name" required
+                        class="form-input" /> </div>
+
+            <div class="form-group"> <label for="div">Div</label> <input id="div" name="div" class="form-input">
+            </div>
+
+            <div class="form-actions"> <button type="submit" class="add-student-button add">Add</button>
+                  <button type="button" class="add-student-button close" (click)="onCancel()">Close</button>
+            </div>
+      </form>
+</div>

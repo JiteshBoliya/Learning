@@ -1,28 +1,37 @@
+<app-navbar />
 <div class="dashboard-container">
-      <header class="dashboard-header">
-            <h1 class="title">Dashboard</h1>
+      <div class="tab-container">
+            <header class="dashboard-header">
+                  <!-- <h1 class="title">Dashboard</h1> -->
 
-            <div class="button-container">
-                  <button class="add-button">+ Add
-                        Div</button>
-                  <button class="add-button">+ Add
-                        Student</button>
-            </div>
-      </header>
-      <table class="dashboard-table">
-            <thead>
-                  <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Div</th>
-                  </tr>
-            </thead>
-            <tbody>
-                  <tr *ngFor="let student of students">
-                        <td>{{ student.id }}</td>
-                        <td>{{ student.name }}</td>
-                        <td>{{ student.div }}</td>
-                  </tr>
-            </tbody>
-      </table>
+                  <div class="button-container">
+                        <!-- <button class="add-button" (click)="openAddDivDialog()">+ Add
+                              Div</button> -->
+                        <button class="add-button" (click)="openAddStudentDialog()">+ Add
+                              Student</button>
+                  </div>
+            </header>
+            <table class="dashboard-table">
+                  <thead>
+                        <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Div</th>
+                              <th>Action</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        <tr *ngFor="let student of students">
+                              <td>{{ student.id }}</td>
+                              <td>{{ student.name }}</td>
+                              <td>{{ student.div }}</td>
+                              <td>
+                                    <button mat-mini-fab><mat-icon>visibility</mat-icon></button>
+                                    <button mat-mini-fab><mat-icon>sync_alt</mat-icon></button>
+                              </td>
+                        </tr>
+                  </tbody>
+            </table>
+      </div>
+
 </div>

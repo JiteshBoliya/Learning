@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddStudentComponent } from '../add-student/add-student.component';
+import { AddDivComponent } from '../add-div/add-div.component';
 
 @Component({
   selector: 'app-student-list',
@@ -7,7 +10,7 @@ import { Component } from '@angular/core';
   styleUrl: './student-list.component.scss'
 })
 export class StudentListComponent {
-
+  constructor(private dialog: MatDialog) { }
   students: { id: number, name: string, div: string }[] = [
     { id: 1, name: "Aarav Sharma", div: "A" },
     { id: 2, name: "Ishita Mehta", div: "B" },
@@ -20,4 +23,17 @@ export class StudentListComponent {
     { id: 9, name: "Aditya Singh", div: "C" },
     { id: 10, name: "Priya Nair", div: "A" }
   ]
+
+
+  openAddStudentDialog() {
+    const studentDialogRef = this.dialog.open(AddStudentComponent, {
+      width: '1000px'
+    });
+  }
+
+  openAddDivDialog() {
+    const divDialogRef = this.dialog.open(AddDivComponent, {
+      width: '1000px'
+    });
+  }
 }

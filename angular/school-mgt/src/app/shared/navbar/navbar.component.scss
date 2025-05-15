@@ -1,0 +1,40 @@
+.mat-toolbar {
+      background-color: rgb(114, 114, 114);
+      color: white;
+}
+
+[mat-raised-button],
+[mat-stroked-button] {
+      font-family: 'Roboto Condensed', sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1.25px;
+
+      border-radius: 0px;
+      margin: 0px;
+      height: 90%;
+
+
+}
+
+[mat-stroked-button] {
+      border-color: white !important;
+
+      &:hover {
+            background-color: rgb(27, 27, 27) !important;
+      }
+}
+
+.active-link {
+      background-color: lightgreen !important;
+      color: white !important;
+}
+
+.logout {
+      background-color: transparent !important;
+      color: white !important;
+}
+
+.spacer {
+      flex: 1 1 auto;
+}
