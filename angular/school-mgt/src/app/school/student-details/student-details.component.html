@@ -1,1 +1,33 @@
-<p>student-details works!</p>
+<div class="student-detail-card">
+      <h2>Student Details</h2>
+
+      <p><strong>Name:</strong> {{ student.name }}</p>
+      <p><strong>Current School:</strong> {{ student.currentSchool }}</p>
+      <p><strong>Division:</strong> {{ student.division }}</p>
+      @if (student.transfers?.length > 0){
+      <div>
+            <h3>Transfer History</h3>
+            <table class="table table-bordered">
+                  <thead>
+                        <tr>
+                              <th>Date</th>
+                              <th>Transferred From</th>
+                              <th>Transferred To</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        <tr *ngFor="let transfer of student.transfers">
+                              <td>{{ transfer.date }}</td>
+                              <td>{{ transfer.from }}</td>
+                              <td>{{ transfer.to }}</td>
+                        </tr>
+                  </tbody>
+            </table>
+      </div>
+      }
+
+
+      <div *ngIf="!student.transfers || student.transfers.length === 0">
+            <p>No transfer history available.</p>
+      </div>
+</div>

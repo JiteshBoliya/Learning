@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddStudentComponent } from '../add-student/add-student.component';
 import { AddDivComponent } from '../add-div/add-div.component';
+import { StudentDetailsComponent } from '../student-details/student-details.component';
+import { AddRequestComponent } from '../transfer/add-request/add-request.component';
 
 @Component({
   selector: 'app-student-list',
@@ -31,8 +33,20 @@ export class StudentListComponent {
     });
   }
 
-  openAddDivDialog() {
-    const divDialogRef = this.dialog.open(AddDivComponent, {
+  // openAddDivDialog() {
+  //   const divDialogRef = this.dialog.open(AddDivComponent, {
+  //     width: '1000px'
+  //   });
+  // }
+
+  openStudentDetailDialog() {
+    const studentDetailDialogRef = this.dialog.open(StudentDetailsComponent, {
+      width: '1000px'
+    });
+  }
+
+  openAddRequestDialog() {
+    const addRequestDialogRef = this.dialog.open(AddRequestComponent, {
       width: '1000px'
     });
   }

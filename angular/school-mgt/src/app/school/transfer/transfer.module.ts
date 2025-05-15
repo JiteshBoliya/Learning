@@ -22,6 +22,8 @@ import { SharedModule } from '../../shared/shared.module';
     TransferRoutingModule,
     MaterialModule,
     SharedModule
+  ], exports: [
+    AddRequestComponent
   ]
 })
 export class TransferModule { }
