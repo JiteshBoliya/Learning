@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from './app.component';
-import { AdminModule } from './admin/admin.module';
-import { SchoolModule } from './school/school.module';
-import { AuthModule } from './auth/auth.module';
 import { AppRoutingModule } from './app.routes';
 import { BrowserModule } from '@angular/platform-browser';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { MaterialModule } from './material.module';
 import { SharedModule } from './shared/shared.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AdminModule } from './features/admin/admin.module';
+import { SchoolModule } from './features/school/school.module';
+import { AuthModule } from './features/auth/auth.module';
+import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 
 
 @NgModule({

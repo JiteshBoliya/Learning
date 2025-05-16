@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { NgModule } from '@angular/core';
+import { PageNotFoundComponent } from './features/page-not-found/page-not-found.component';
 export const routes: Routes = [
       {
             path: '',
@@ -9,15 +9,15 @@ export const routes: Routes = [
       },
       {
             path: 'auth',
-            loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+            loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule)
       },
       {
             path: 'admin',
-            loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+            loadChildren: () => import('./features/admin/admin.module').then(m => m.AdminModule)
       },
       {
             path: 'school',
-            loadChildren: () => import('./school/school.module').then(m => m.SchoolModule)
+            loadChildren: () => import('./features/school/school.module').then(m => m.SchoolModule)
       },
       {
             path: '**',

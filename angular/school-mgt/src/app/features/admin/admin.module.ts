@@ -4,7 +4,7 @@ import { AddSchoolComponent } from './add-school/add-school.component';
 import { SchoolListComponent } from './school-list/school-list.component';
 import { AdminRoutingModule } from './admin.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { StudentService } from '../../../core/services/student.service';
 
 @Component({
   selector: 'app-add-student',
@@ -10,7 +11,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class AddStudentComponent {
   studentForm!: FormGroup;
-  constructor(private dialogRef: MatDialogRef<AddStudentComponent>, private fb: FormBuilder) { }
+  constructor(
+    private dialogRef: MatDialogRef<AddStudentComponent>,
+    private fb: FormBuilder,
+    private studentService: StudentService) { }
 
   ngOnInit(): void {
     this.studentForm = this.fb.group({
@@ -20,7 +24,12 @@ export class AddStudentComponent {
   }
 
   onSubmit() {
-    console.log('------------', this.studentForm.value);
+    try {
+      this.studentService.addStudent(this.studentForm.value);
+    } catch (error) {
+      console.log({ error });
+    }
+    this.dialogRef.close();
   }
 
   onCancel() {

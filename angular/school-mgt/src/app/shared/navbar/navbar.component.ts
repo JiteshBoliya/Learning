@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../core/services/auth.service';
+import { LocalStorageService } from '../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,19 +10,18 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  username = '';
-  role = '';
+  role: any;
 
-  constructor(private router: Router) { }
+  constructor(private localStorage: LocalStorageService, private authService: AuthService) { }
   ngOnInit(): void {
-    this.username = '' + localStorage.getItem('username');
-    this.role = '' + localStorage.getItem('role');
-
-    if (!this.username) this.logout();
+    this.role = this.localStorage.getItem('role');
   }
 
   logout() {
-    this.router.navigate(['auth']);
-    localStorage.clear();
+    try {
+      this.authService.logout();
+    } catch (error) {
+      console.error({ error });
+    }
   }
 }

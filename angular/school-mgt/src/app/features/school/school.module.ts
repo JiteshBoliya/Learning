@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { AddStudentComponent } from './add-student/add-student.component';
 import { StudentDetailsComponent } from './student-details/student-details.component';
 import { StudentListComponent } from './student-list/student-list.component';
-import { MaterialModule } from '../material.module';
 import { TransferModule } from './transfer/transfer.module';
 import { SchoolRoutingModule } from './school.routes';
-import { SharedModule } from '../shared/shared.module';
 import { SchoolComponent } from './school.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../../material.module';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
