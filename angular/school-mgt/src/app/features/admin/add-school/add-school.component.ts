@@ -18,10 +18,10 @@ export class AddSchoolComponent {
     private schoolService: SchoolService
   ) {
     this.schoolForm = this.fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      contactNo: [null, [Validators.required, Validators.pattern(/^\d{10}$/)]],
-      email: ['', [Validators.required, Validators.email]],
+      // name: ['', Validators.required],
+      // address: ['', Validators.required],
+      // contactNo: [null, [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      // email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
       password: ['', Validators.required],
     });

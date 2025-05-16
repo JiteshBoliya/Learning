@@ -22,14 +22,16 @@
                   </thead>
                   <tbody>
                         <tr *ngFor="let student of students">
-                              <td>{{ student.id }}</td>
+                              <td>{{ student.studentId }}</td>
                               <td>{{ student.name }}</td>
                               <td>{{ student.div }}</td>
                               <td>
-                                    <button mat-mini-fab
-                                          (click)="openStudentDetailDialog()"><mat-icon>visibility</mat-icon></button>
-                                    <button mat-mini-fab><mat-icon
-                                                (click)="openAddRequestDialog()">sync_alt</mat-icon></button>
+                                    <button mat-mini-fab (click)="openStudentDetailDialog(student)">
+                                          <mat-icon>visibility</mat-icon>
+                                    </button>
+                                    <button mat-mini-fab (click)="openAddRequestDialog(student)">
+                                          <mat-icon>sync_alt</mat-icon>
+                                    </button>
                               </td>
                         </tr>
                   </tbody>

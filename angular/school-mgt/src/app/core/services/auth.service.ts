@@ -9,17 +9,29 @@ import { Router } from '@angular/router';
 export class AuthService {
       private demoLoginData = [
             {
-                  id: 'l1',
+                  loginId: 'l1',
                   username: "admin",
-                  password: "pass",
+                  password: "aa",
                   role: "admin"
             },
             {
-                  id: 'l2',
-                  username: "school",
-                  password: "pass",
+                  loginId: 'l2',
+                  username: "GreenValley",
+                  password: "aa",
                   role: "school"
             },
+            {
+                  loginId: 'l3',
+                  username: "SunrisePublic",
+                  password: "aa",
+                  role: "school"
+            },
+            {
+                  loginId: 'l4',
+                  username: "Bluebird",
+                  password: "aa",
+                  role: "school"
+            }
       ]
 
       constructor(private router: Router, private localStorage: LocalStorageService) { }
@@ -35,7 +47,7 @@ export class AuthService {
                         this.localStorage.setItem([
                               { key: 'username', value: username },
                               { key: 'role', value: result.role },
-                              { key: 'id', value: result.id }
+                              { key: 'loginId', value: result.loginId }
                         ])
                         if (result.role === "admin") {
                               this.router.navigate(['admin']);
@@ -61,9 +73,9 @@ export class AuthService {
 
       register(loginData: Login, role: string) {
             try {
-                  const id = 'l' + this.demoLoginData.length + 1;
-                  this.demoLoginData.push({ id, ...loginData, role });
-                  return { id, ...loginData, role };
+                  const loginId = 'L' + (this.demoLoginData.length + 1);
+                  this.demoLoginData.push({ loginId, ...loginData, role });
+                  return { loginId, ...loginData, role };
             } catch (error) {
                   console.error({ error });
                   return null;

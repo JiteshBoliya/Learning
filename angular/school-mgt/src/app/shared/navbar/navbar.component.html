@@ -1,9 +1,9 @@
 <mat-toolbar color="primary">
-      <span>Dashboard</span>
+      <span>{{username}} | Dashboard</span>
       <div class="spacer"></div>
       @if(role != "admin"){
-      <a mat-raised-button routerLink="/school/student-list" routerLinkActive="active-link">Student</a>
       <a mat-raised-button routerLink="/school/transfer" routerLinkActive="active-link">Transfer</a>
+      <a mat-raised-button routerLink="/school/student-list" routerLinkActive="active-link">Student</a>
       }
       <a mat-stroked-button class="logout" (click)="logout()">Logout</a>
 </mat-toolbar>

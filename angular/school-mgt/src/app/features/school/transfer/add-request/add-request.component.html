@@ -10,9 +10,9 @@
                   <label for="school">School</label>
                   <select id="school" name="school" class="form-input" formControlName="school">
                         <option value="" disabled selected>Select School</option>
-                        <option value="Springfield High">Springfield High</option>
-                        <option value="Riverdale Middle">Riverdale Middle</option>
-                        <option value="Greenwood Elementary">Greenwood Elementary</option>
+                        @for(school of schoolList; track school) {
+                        <option [value]="school.name">{{ school.name}}</option>
+                        }
                   </select>
             </div>
 

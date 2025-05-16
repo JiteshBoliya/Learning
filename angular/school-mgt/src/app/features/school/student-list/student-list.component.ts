@@ -36,15 +36,23 @@ export class StudentListComponent implements OnInit {
   //   });
   // }
 
-  openStudentDetailDialog() {
-    const studentDetailDialogRef = this.dialog.open(StudentDetailsComponent, {
-      width: '1000px'
-    });
+  openStudentDetailDialog(student: any) {
+    try {
+      const studentDetailDialogRef = this.dialog.open(StudentDetailsComponent, {
+        width: '1000px',
+        data: student
+      });
+    } catch (error) {
+      console.log({ error });
+
+    }
+
   }
 
-  openAddRequestDialog() {
+  openAddRequestDialog(student: any) {
     const addRequestDialogRef = this.dialog.open(AddRequestComponent, {
-      width: '1000px'
+      width: '1000px',
+      data: student
     });
   }
 }

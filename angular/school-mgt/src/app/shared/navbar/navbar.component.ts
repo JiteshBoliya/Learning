@@ -10,11 +10,13 @@ import { LocalStorageService } from '../../core/services/local-storage.service';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent implements OnInit {
-  role: any;
+  role: string | null = '';
+  username: string | null = '';
 
-  constructor(private localStorage: LocalStorageService, private authService: AuthService) { }
+  constructor(private localStorageService: LocalStorageService, private authService: AuthService) { }
   ngOnInit(): void {
-    this.role = this.localStorage.getItem('role');
+    this.role = this.localStorageService.getItem('role');
+    this.username = this.localStorageService.getItem('username');
   }
 
   logout() {
