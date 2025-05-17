@@ -21,7 +21,6 @@ export class AddRequestComponent {
     private dialogRef: MatDialogRef<AddRequestComponent>,
     private fb: FormBuilder,
     private schoolService: SchoolService,
-    private studentService: StudentService,
     private transferService: TransferService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -30,7 +29,7 @@ export class AddRequestComponent {
     this.schoolList = this.schoolService.getSchoolListForTransfer(this.data);
 
     this.transferRequestForm = this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required]],
       school: ['', [Validators.required]]
     });
     this.transferRequestForm.controls['name'].patchValue(this.data.name);
@@ -38,8 +37,15 @@ export class AddRequestComponent {
   }
 
   onSubmit() {
-    console.log('------------', this.transferRequestForm.value);
+    this.transferService.addTransferRequest({
+      studentId: this.data.studentId,
+      name: this.data.name,
+      currentSchoolId: this.data.schoolId,
+      transferSchoolId: this.transferRequestForm.value['school']
+    });
+    this.dialogRef.close();
   }
+
   onCancel() {
     this.dialogRef.close();
   }

@@ -14,7 +14,7 @@ export class StudentService {
       ];
       constructor(
             private localStorageService: LocalStorageService,
-            private schoolService: SchoolService,
+            private schoolService: SchoolService
       ) { }
 
       getStudentList() {
@@ -23,11 +23,19 @@ export class StudentService {
             return this.demoStudentData.filter((st) => st.schoolId === schoolData?.schoolId);
       }
 
-      getStudent(studentId: string) {
+      async getStudent(studentId: string) {
             try {
                   const result = this.demoStudentData.find((s) => s.studentId === studentId);
                   if (!result) return null;
-                  return result;
+
+                  const currentSchool = await this.schoolService.getSchoolBySchoolId(result.schoolId);
+
+                  const studentDetails = {
+                        name: result.name,
+                        currentSchool: currentSchool?.name,
+                        div: result.div,
+                  }
+                  return studentDetails;
             } catch (error) {
                   console.error({ error });
                   return null;
@@ -47,12 +55,28 @@ export class StudentService {
                   if (!schoolData) return null;
                   // Store the student data
                   this.demoStudentData.push({ studentId, name, div, schoolId: schoolData.schoolId });
-                  console.log('+++++++++++', this.demoStudentData);
 
                   return studentId;
             } catch (error) {
                   console.error({ error });
                   return null;
             }
+      }
+
+      transferStudent(schoolId: string, studentId: string) {
+            try {
+                  this.demoStudentData = this.demoStudentData.map((st) => {
+                        if (st.studentId === studentId) {
+                              st.schoolId = schoolId
+                        }
+                        return st;
+                  })
+
+                  return studentId;
+            } catch (error) {
+                  console.error({ error });
+                  return null;
+            }
+
       }
 }

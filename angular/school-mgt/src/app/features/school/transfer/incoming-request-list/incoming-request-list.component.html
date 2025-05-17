@@ -10,14 +10,22 @@
                   </tr>
             </thead>
             <tbody>
-                  <tr *ngFor="let req of incomingTransferRequest">
-                        <td>{{ req.id }}</td>
-                        <td>{{ req.date }}</td>
+                  <tr *ngFor="let req of demoIncomingRequest">
+                        <td>{{ req.transferId }}</td>
+                        <td>{{ req.date | date }}</td>
                         <td>{{ req.studentName }}</td>
-                        <td>{{ req.schoolName }}</td>
+                        <td>{{ req.fromSchool }}</td>
                         <td>
-                              <button mat-mini-fab><mat-icon>check</mat-icon></button>
-                              <button mat-mini-fab><mat-icon>close</mat-icon></button>
+                              @if (req.status === 'Pending') {
+                              <button mat-mini-fab
+                                    (click)="onAction(req.transferId, 'Approved')"><mat-icon>check</mat-icon></button>
+                              <button mat-mini-fab
+                                    (click)="onAction(req.transferId, 'Rejected')"><mat-icon>close</mat-icon></button>
+                              } @else {
+                              <div class="chip">
+                                    <div class="chip-content">{{ req.status }}</div>
+                              </div>
+                              }
                         </td>
                   </tr>
             </tbody>

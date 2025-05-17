@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TransferService } from '../../../../core/services/transfer.service';
+import { LocalStorageService } from '../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-incoming-request-list',
@@ -7,67 +9,24 @@ import { Component } from '@angular/core';
   styleUrl: './incoming-request-list.component.scss'
 })
 
-export class IncomingRequestListComponent {
-  incomingTransferRequest = [
-    {
-      "id": 1,
-      "date": "2025-05-12",
-      "studentName": "Emma Wilson",
-      "schoolName": "Oakridge Elementary"
-    },
-    {
-      "id": 2,
-      "date": "2025-05-10",
-      "studentName": "Noah Martinez",
-      "schoolName": "Westlake High School"
-    },
-    {
-      "id": 3,
-      "date": "2025-05-14",
-      "studentName": "Olivia Johnson",
-      "schoolName": "Riverside Academy"
-    },
-    {
-      "id": 4,
-      "date": "2025-05-08",
-      "studentName": "Liam Thompson",
-      "schoolName": "Pinecrest Middle School"
-    },
-    {
-      "id": 5,
-      "date": "2025-05-13",
-      "studentName": "Sophia Garcia",
-      "schoolName": "Lakeview Elementary"
-    },
-    {
-      "id": 6,
-      "date": "2025-05-09",
-      "studentName": "Jackson Brown",
-      "schoolName": "Maplewood High School"
-    },
-    {
-      "id": 7,
-      "date": "2025-05-11",
-      "studentName": "Ava Williams",
-      "schoolName": "Crestview Academy"
-    },
-    {
-      "id": 8,
-      "date": "2025-05-07",
-      "studentName": "Lucas Davis",
-      "schoolName": "Sunnydale Elementary"
-    },
-    {
-      "id": 9,
-      "date": "2025-05-15",
-      "studentName": "Mia Rodriguez",
-      "schoolName": "Brookside Middle School"
-    },
-    {
-      "id": 10,
-      "date": "2025-05-06",
-      "studentName": "Ethan Miller",
-      "schoolName": "Hillcrest High School"
-    }
-  ]
+export class IncomingRequestListComponent implements OnInit {
+  demoIncomingRequest: any[] = [];
+
+  constructor(
+    private localStorageService: LocalStorageService,
+    private transferService: TransferService
+  ) { }
+
+  ngOnInit(): void {
+    const loginId = this.localStorageService.getItem('loginId');
+    this.demoIncomingRequest = this.transferService.inboxList(loginId ? loginId : '');
+  }
+
+
+  onAction(transferId: string, action: string) {
+    this.transferService.updateAction(transferId, action);
+  }
+
+
+
 }

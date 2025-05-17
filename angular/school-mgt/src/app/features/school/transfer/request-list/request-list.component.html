@@ -5,18 +5,18 @@
                         <th>ID</th>
                         <th>Date</th>
                         <th>Student name</th>
-                        <th>Student Div</th>
-                        <th>Transfer to school</th>
+                        <!-- <th>Student Div</th> -->
+                        <th>Transfer to</th>
                         <th>Status</th>
                   </tr>
             </thead>
             <tbody>
                   <tr *ngFor="let req of requestData">
-                        <td>{{ req.id }}</td>
-                        <td>{{ req.date }}</td>
+                        <td>{{ req.transferId }}</td>
+                        <td>{{ req.date | date}}</td>
                         <td>{{ req.studentName }}</td>
-                        <td>{{ req.studentDiv }}</td>
-                        <td>{{ req.transferToSchool }}</td>
+                        <!-- <td>{{ req.studentDiv }}</td> -->
+                        <td>{{ req.transferSchool }}</td>
                         <td class="status">
                               <div class="chip">
                                     <div class="chip-content">{{ req.status }}</div>

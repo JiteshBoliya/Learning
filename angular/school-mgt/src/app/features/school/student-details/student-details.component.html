@@ -1,10 +1,10 @@
 <div class="student-detail-card">
       <h2>Student Details</h2>
-
-      <p><strong>Name:</strong> {{ data.name }}</p>
-      <p><strong>Current School:</strong> {{ data.currentSchool }}</p>
-      <p><strong>Division:</strong> {{ data.div }}</p>
-      @if (data.transfers?.length > 0){
+      @if(studentDetail) {
+      <p><strong>Name:</strong> {{ studentDetail.name }}</p>
+      <p><strong>Current School:</strong> {{ studentDetail.currentSchool }}</p>
+      <p><strong>Division:</strong> {{ studentDetail.div }}</p>
+      @if (studentDetail.transferLogs?.length > 0){
       <div>
             <h3>Transfer History</h3>
             <table class="table table-bordered">
@@ -16,8 +16,8 @@
                         </tr>
                   </thead>
                   <tbody>
-                        <tr *ngFor="let transfer of data.transfers">
-                              <td>{{ transfer.date }}</td>
+                        <tr *ngFor="let transfer of studentDetail.transferLogs">
+                              <td>{{ transfer.date | date }}</td>
                               <td>{{ transfer.from }}</td>
                               <td>{{ transfer.to }}</td>
                         </tr>
@@ -25,7 +25,11 @@
             </table>
       </div>
       }
-      <div *ngIf="!data.transfers || data.transfers.length === 0">
+      <div *ngIf="!studentDetail.transferLogs || studentDetail.transferLogs.length === 0">
             <p>No transfer history available.</p>
       </div>
+      } @else {
+      <p>Student data not found</p>
+      }
+
 </div>

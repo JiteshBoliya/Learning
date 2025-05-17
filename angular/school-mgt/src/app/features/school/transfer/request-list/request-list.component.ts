@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransferService } from '../../../../core/services/transfer.service';
+import { LocalStorageService } from '../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-request-list',
@@ -10,10 +11,14 @@ import { TransferService } from '../../../../core/services/transfer.service';
 export class RequestListComponent implements OnInit {
   requestData: any[] = []
 
-  constructor(private transferService: TransferService) { }
+  constructor(
+    private localStorageService: LocalStorageService,
+    private transferService: TransferService
+  ) { }
 
   ngOnInit(): void {
-    this.requestData = this.transferService.getTransferRequestList();
+    const loginId = this.localStorageService.getItem('loginId');
+    this.requestData = this.transferService.getTransferRequestList(loginId ? loginId : '');
   }
 
 }

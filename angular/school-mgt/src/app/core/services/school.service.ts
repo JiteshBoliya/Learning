@@ -56,6 +56,10 @@ export class SchoolService {
             return this.demoSchoolData.find((ss) => ss.loginId === loginId);
       }
 
+      getSchoolBySchoolId(schoolId: string) {
+            return this.demoSchoolData.find((ss) => ss.schoolId === schoolId);
+      }
+
       getSchoolListForTransfer(data: any) {
             return this.demoSchoolData.filter((s) => s.schoolId !== data.schoolId);
       }
