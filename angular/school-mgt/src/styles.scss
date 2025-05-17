@@ -1,4 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+.Approved {
+    background-color: #c2efc2;
+    border: 1px solid #075d00;
+}
+
+.Rejected {
+    background-color: #efc2c2;
+    border: 1px solid #5d0000;
+}
+
+.Pending {
+    background-color: #edefc2;
+    border: 1px solid #5c5d00;
+}

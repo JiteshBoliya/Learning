@@ -26,7 +26,4 @@ export class IncomingRequestListComponent implements OnInit {
   onAction(transferId: string, action: string) {
     this.transferService.updateAction(transferId, action);
   }
-
-
-
 }

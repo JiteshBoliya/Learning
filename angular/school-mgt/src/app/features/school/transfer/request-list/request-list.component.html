@@ -18,7 +18,7 @@
                         <!-- <td>{{ req.studentDiv }}</td> -->
                         <td>{{ req.transferSchool }}</td>
                         <td class="status">
-                              <div class="chip">
+                              <div class="chip" [ngClass]="req.status">
                                     <div class="chip-content">{{ req.status }}</div>
                               </div>
                         </td>

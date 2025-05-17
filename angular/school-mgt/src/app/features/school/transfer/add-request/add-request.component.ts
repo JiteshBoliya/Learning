@@ -6,6 +6,7 @@ import { StudentService } from '../../../../core/services/student.service';
 import { TransferService } from '../../../../core/services/transfer.service';
 import { Student } from '../../../../core/models/student.model';
 import { School } from '../../../../core/models/school.model';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-add-request',
@@ -37,13 +38,18 @@ export class AddRequestComponent {
   }
 
   onSubmit() {
+    let resultData = null;
     this.transferService.addTransferRequest({
       studentId: this.data.studentId,
       name: this.data.name,
       currentSchoolId: this.data.schoolId,
       transferSchoolId: this.transferRequestForm.value['school']
+    }).subscribe((res) => {
+      if (res) {
+        resultData = res;
+      }
     });
-    this.dialogRef.close();
+    this.dialogRef.close(resultData);
   }
 
   onCancel() {

@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddStudentComponent } from '../add-student/add-student.component';
-import { AddDivComponent } from '../add-div/add-div.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
 import { AddRequestComponent } from '../transfer/add-request/add-request.component';
 import { StudentService } from '../../../core/services/student.service';
@@ -14,45 +13,49 @@ import { Student } from '../../../core/models/student.model';
   styleUrl: './student-list.component.scss'
 })
 export class StudentListComponent implements OnInit {
-  students: Student[] = [];
+  students = signal<Student[]>([]);
+
   constructor(
     private dialog: MatDialog,
     private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.students = this.studentService.getStudentList()
+    this.studentService.getStudentList().subscribe((res) => {
+      this.students.set(res);
+    })
   }
-
 
   openAddStudentDialog() {
     const studentDialogRef = this.dialog.open(AddStudentComponent, {
       width: '1000px'
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.students.update(values => {
+          return [...values, result];
+        });
+      }
     });
   }
-
-  // openAddDivDialog() {
-  //   const divDialogRef = this.dialog.open(AddDivComponent, {
-  //     width: '1000px'
-  //   });
-  // }
 
   openStudentDetailDialog(student: any) {
     try {
       const studentDetailDialogRef = this.dialog.open(StudentDetailsComponent, {
         width: '1000px',
         data: student
-      });
+      })
     } catch (error) {
       console.log({ error });
-
     }
-
   }
 
   openAddRequestDialog(student: any) {
     const addRequestDialogRef = this.dialog.open(AddRequestComponent, {
       width: '1000px',
       data: student
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.students.set(result);
+      }
     });
   }
 }

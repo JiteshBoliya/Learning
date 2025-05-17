@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SchoolService } from './school.service';
 import { StudentService } from './student.service';
+import { Observable, of } from 'rxjs';
 
 
 @Injectable({
@@ -30,9 +31,14 @@ export class TransferService {
             return updateTransferData;
       }
 
-      addTransferRequest(transferData: any) {
+      addTransferRequest(transferData: any): Observable<any> {
             const transferId = 'TN' + (this.demoTransferRequestData.length + 1);
+            let resultData = null;
             this.demoTransferRequestData.push({ transferId, ...transferData, date: new Date(), status: "Pending" });
+            this.studentService.updateStudentTransferStatus(transferData.currentSchoolId, transferData.studentId).subscribe((res) => {
+                  resultData = res;
+            });
+            return of(resultData);
       }
 
       inboxList(loginId: string) {

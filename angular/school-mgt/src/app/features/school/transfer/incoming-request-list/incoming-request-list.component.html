@@ -15,14 +15,14 @@
                         <td>{{ req.date | date }}</td>
                         <td>{{ req.studentName }}</td>
                         <td>{{ req.fromSchool }}</td>
-                        <td>
+                        <td class="action">
                               @if (req.status === 'Pending') {
                               <button mat-mini-fab
                                     (click)="onAction(req.transferId, 'Approved')"><mat-icon>check</mat-icon></button>
                               <button mat-mini-fab
                                     (click)="onAction(req.transferId, 'Rejected')"><mat-icon>close</mat-icon></button>
                               } @else {
-                              <div class="chip">
+                              <div class="chip" [ngClass]="req.status">
                                     <div class="chip-content">{{ req.status }}</div>
                               </div>
                               }

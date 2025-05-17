@@ -20,5 +20,4 @@ export class RequestListComponent implements OnInit {
     const loginId = this.localStorageService.getItem('loginId');
     this.requestData = this.transferService.getTransferRequestList(loginId ? loginId : '');
   }
-
 }
