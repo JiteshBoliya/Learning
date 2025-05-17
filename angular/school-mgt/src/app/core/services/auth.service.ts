@@ -11,25 +11,25 @@ export class AuthService {
             {
                   loginId: 'l1',
                   username: "admin",
-                  password: "aa",
+                  password: "aaAA!!11",
                   role: "admin"
             },
             {
                   loginId: 'l2',
                   username: "GreenValley",
-                  password: "aa",
+                  password: "aaAA!!11",
                   role: "school"
             },
             {
                   loginId: 'l3',
                   username: "SunrisePublic",
-                  password: "aa",
+                  password: "aaAA!!11",
                   role: "school"
             },
             {
                   loginId: 'l4',
                   username: "Bluebird",
-                  password: "aa",
+                  password: "aaAA!!11",
                   role: "school"
             }
       ]

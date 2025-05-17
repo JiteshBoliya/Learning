@@ -21,17 +21,30 @@
                   <div class=" form-group">
                         <label for="username">Username</label>
                         <input type="username" formControlName="username" id="username" name="username" required
-                              class="form-input" />
+                              class="form-input" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+                              <div *ngIf="f['username'].errors['required']">Full name is required</div>
+                              <div *ngIf="f['username'].errors['minlength']">Full name must be at least 3 characters
+                              </div>
+                        </div>
                   </div>
                   <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" formControlName="password" id="password" name="password" required
-                              class="form-input" />
+                              class="form-input" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                              <div *ngIf="f['password'].errors['required']">Password is required</div>
+                              <div *ngIf="f['password'].errors['minlength']">Password must be at least 8
+                                    characters</div>
+                              <div *ngIf="f['password'].errors['pattern']">
+                                    Password must contain at least one uppercase letter, one lowercase letter,
+                                    one number and one special character
+                              </div>
+                        </div>
                   </div>
                   <div class="form-group">
                         <button type="button" class="login-button" (click)="onSubmit()">Login</button>
                   </div>
-
             </form>
       </div>
 </div>

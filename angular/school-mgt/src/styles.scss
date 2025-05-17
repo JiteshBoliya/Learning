@@ -25,3 +25,14 @@ body {
     background-color: #edefc2;
     border: 1px solid #5c5d00;
 }
+
+.invalid-feedback {
+    color: rgb(114, 0, 0);
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.is-invalid {
+    border-color: #a30000 !important;
+
+}
