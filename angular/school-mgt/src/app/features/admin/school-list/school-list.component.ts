@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddSchoolComponent } from '../add-school/add-school.component';
 import { SchoolService } from '../../../core/services/school.service';
-import { School } from '../../../core/models/school.model';
+import { School } from '../../../core/models/data.model';
 
 @Component({
   selector: 'app-school-list',

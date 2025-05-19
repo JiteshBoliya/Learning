@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { TransferService } from '../../../../core/services/transfer.service';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-incoming-request-list',
@@ -10,18 +9,15 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
 })
 
 export class IncomingRequestListComponent implements OnInit {
-  demoIncomingRequest: any[] = [];
-
-  constructor(
-    private localStorageService: LocalStorageService,
-    private transferService: TransferService
-  ) { }
+  inboxRequestList = signal<any[]>([]);
+  constructor(private transferService: TransferService) { }
 
   ngOnInit(): void {
-    const loginId = this.localStorageService.getItem('loginId');
-    this.demoIncomingRequest = this.transferService.inboxList(loginId ? loginId : '');
+    const loginId = localStorage.getItem('loginId');
+    if (loginId) {
+      this.inboxRequestList.set(this.transferService.inboxList(loginId));
+    }
   }
-
 
   onAction(transferId: string, action: string) {
     this.transferService.updateAction(transferId, action);

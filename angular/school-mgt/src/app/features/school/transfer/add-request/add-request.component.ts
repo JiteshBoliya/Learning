@@ -1,12 +1,9 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { SchoolService } from '../../../../core/services/school.service';
-import { StudentService } from '../../../../core/services/student.service';
 import { TransferService } from '../../../../core/services/transfer.service';
-import { Student } from '../../../../core/models/student.model';
-import { School } from '../../../../core/models/school.model';
-import { of } from 'rxjs';
+import { School, Student } from '../../../../core/models/data.model';
 
 @Component({
   selector: 'app-add-request',
@@ -16,8 +13,8 @@ import { of } from 'rxjs';
 })
 export class AddRequestComponent {
   transferRequestForm!: FormGroup;
-  studentList: Student[] = [];
-  schoolList: School[] = [];
+  schoolList = signal<School[]>([]);
+
   constructor(
     private dialogRef: MatDialogRef<AddRequestComponent>,
     private fb: FormBuilder,
@@ -27,7 +24,7 @@ export class AddRequestComponent {
   ) { }
 
   ngOnInit(): void {
-    this.schoolList = this.schoolService.getSchoolListForTransfer(this.data);
+    this.schoolList.set(this.schoolService.getSchoolListForTransfer(this.data));
 
     this.transferRequestForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -38,16 +35,11 @@ export class AddRequestComponent {
   }
 
   onSubmit() {
-    let resultData = null;
-    this.transferService.addTransferRequest({
+    const resultData = this.transferService.addTransferRequest({
       studentId: this.data.studentId,
       name: this.data.name,
       currentSchoolId: this.data.schoolId,
       transferSchoolId: this.transferRequestForm.value['school']
-    }).subscribe((res) => {
-      if (res) {
-        resultData = res;
-      }
     });
     this.dialogRef.close(resultData);
   }

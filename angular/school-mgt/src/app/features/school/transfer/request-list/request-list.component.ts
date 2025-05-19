@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { TransferService } from '../../../../core/services/transfer.service';
-import { LocalStorageService } from '../../../../core/services/local-storage.service';
 
 @Component({
   selector: 'app-request-list',
@@ -9,15 +8,13 @@ import { LocalStorageService } from '../../../../core/services/local-storage.ser
   styleUrl: './request-list.component.scss'
 })
 export class RequestListComponent implements OnInit {
-  requestData: any[] = []
-
-  constructor(
-    private localStorageService: LocalStorageService,
-    private transferService: TransferService
-  ) { }
+  transferRequestList = signal<any[]>([])
+  constructor(private transferService: TransferService) { }
 
   ngOnInit(): void {
-    const loginId = this.localStorageService.getItem('loginId');
-    this.requestData = this.transferService.getTransferRequestList(loginId ? loginId : '');
+    const loginId = localStorage.getItem('loginId');
+    if (loginId) {
+      this.transferRequestList.set(this.transferService.getTransferRequestList(loginId));
+    }
   }
 }

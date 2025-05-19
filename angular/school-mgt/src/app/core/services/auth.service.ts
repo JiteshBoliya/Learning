@@ -1,59 +1,30 @@
-import { Injectable } from '@angular/core';
-import { Login } from '../models/login.model';
-import { LocalStorageService } from './local-storage.service';
+import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
+import { authData } from '../models/demoData';
+import { type Auth } from '../models/data.model';
 
 @Injectable({
       providedIn: 'root'
 })
 export class AuthService {
-      private demoLoginData = [
-            {
-                  loginId: 'l1',
-                  username: "admin",
-                  password: "aaAA!!11",
-                  role: "admin"
-            },
-            {
-                  loginId: 'l2',
-                  username: "GreenValley",
-                  password: "aaAA!!11",
-                  role: "school"
-            },
-            {
-                  loginId: 'l3',
-                  username: "SunrisePublic",
-                  password: "aaAA!!11",
-                  role: "school"
-            },
-            {
-                  loginId: 'l4',
-                  username: "Bluebird",
-                  password: "aaAA!!11",
-                  role: "school"
-            }
-      ]
+      private authList = signal<Auth[]>(authData);
+      constructor(private router: Router) { }
 
-      constructor(private router: Router, private localStorage: LocalStorageService) { }
-
-      login(loginData: Login) {
+      login(loginData: Auth) {
             try {
                   const { username, password } = loginData;
-                  const result = this.demoLoginData.find((dl) =>
+                  const result = this.authList().find((dl: Auth) =>
                         dl.username === username
                         && dl.password === password);
 
                   if (result) {
-                        this.localStorage.setItem([
-                              { key: 'username', value: username },
-                              { key: 'role', value: result.role },
-                              { key: 'loginId', value: result.loginId }
-                        ])
-                        if (result.role === "admin") {
-                              this.router.navigate(['admin']);
-                        } else {
+                        localStorage.setItem('username', username);
+                        localStorage.setItem('role', result.role ? result.role : '');
+                        localStorage.setItem('loginId', result.loginId ? result.loginId : '');
+
+                        result.role === "admin" ?
+                              this.router.navigate(['admin']) :
                               this.router.navigate(['school']);
-                        }
                   }
                   return null;
             } catch (error) {
@@ -64,18 +35,21 @@ export class AuthService {
 
       logout() {
             try {
-                  this.localStorage.clearAll();
+                  localStorage.clear();
                   this.router.navigate(['auth']);
             } catch (error) {
                   console.error({ error });
             }
       }
 
-      register(loginData: Login, role: string) {
+      register(loginData: Auth, role: string) {
             try {
-                  const loginId = 'L' + (this.demoLoginData.length + 1);
-                  this.demoLoginData.push({ loginId, ...loginData, role });
-                  return { loginId, ...loginData, role };
+                  const loginId = 'L' + (this.authList().length + 1);
+                  const newData = { loginId, ...loginData, role };
+                  this.authList.update(values => {
+                        return [...values, newData];
+                  });
+                  return newData;
             } catch (error) {
                   console.error({ error });
                   return null;

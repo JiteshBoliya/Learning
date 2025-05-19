@@ -10,7 +10,7 @@
                   <label for="school">School</label>
                   <select id="school" name="school" class="form-input" formControlName="school">
                         <option value="" disabled selected>Select School</option>
-                        @for(school of schoolList; track school) {
+                        @for(school of schoolList(); track school) {
                         <option [value]="school.schoolId">{{ school.name}}</option>
                         }
                   </select>

@@ -10,7 +10,7 @@
                   </tr>
             </thead>
             <tbody>
-                  <tr *ngFor="let req of demoIncomingRequest">
+                  <tr *ngFor="let req of inboxRequestList()">
                         <td>{{ req.transferId }}</td>
                         <td>{{ req.date | date }}</td>
                         <td>{{ req.studentName }}</td>

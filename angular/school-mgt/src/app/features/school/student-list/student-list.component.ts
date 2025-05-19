@@ -4,7 +4,7 @@ import { AddStudentComponent } from '../add-student/add-student.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
 import { AddRequestComponent } from '../transfer/add-request/add-request.component';
 import { StudentService } from '../../../core/services/student.service';
-import { Student } from '../../../core/models/student.model';
+import { Student } from '../../../core/models/data.model';
 
 @Component({
   selector: 'app-student-list',

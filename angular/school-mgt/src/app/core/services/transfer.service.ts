@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { SchoolService } from './school.service';
 import { StudentService } from './student.service';
-import { Observable, of } from 'rxjs';
 
 
 @Injectable({
       providedIn: 'root'
 })
 export class TransferService {
-      private demoTransferRequestData: any[] = [];
+      private transferRequestList = signal<any[]>([]);
       constructor(
             private schoolService: SchoolService,
             private studentService: StudentService
@@ -16,7 +15,7 @@ export class TransferService {
 
       getTransferRequestList(loginId: string) {
             const schoolData = this.schoolService.getSchoolByLoginId(loginId);
-            const updateTransferData = this.demoTransferRequestData
+            const transferData = this.transferRequestList()
                   .filter((tr) => schoolData?.schoolId === tr.currentSchoolId)
                   .map((tr) => {
                         const transferSchool = this.schoolService.getSchoolBySchoolId(tr.transferSchoolId);
@@ -28,22 +27,21 @@ export class TransferService {
                               status: tr.status
                         };
                   });
-            return updateTransferData;
+            return transferData;
       }
 
-      addTransferRequest(transferData: any): Observable<any> {
-            const transferId = 'TN' + (this.demoTransferRequestData.length + 1);
-            let resultData = null;
-            this.demoTransferRequestData.push({ transferId, ...transferData, date: new Date(), status: "Pending" });
-            this.studentService.updateStudentTransferStatus(transferData.currentSchoolId, transferData.studentId).subscribe((res) => {
-                  resultData = res;
+      addTransferRequest(transferData: any) {
+            const transferId = 'TN' + (this.transferRequestList().length + 1);
+            const newData = { transferId, ...transferData, date: new Date(), status: "Pending" };
+            this.transferRequestList.update(values => {
+                  return [...values, newData];
             });
-            return of(resultData);
+            return this.studentService.updateStudentTransferStatus(transferData.currentSchoolId, transferData.studentId);
       }
 
       inboxList(loginId: string) {
             const schoolData = this.schoolService.getSchoolByLoginId(loginId);
-            const inboxList = this.demoTransferRequestData
+            const inboxList = this.transferRequestList()
                   .filter((tr) => schoolData?.schoolId === tr.transferSchoolId)
                   .map((tr) => {
                         const currentSchool = this.schoolService.getSchoolBySchoolId(tr.currentSchoolId);
@@ -59,7 +57,7 @@ export class TransferService {
       }
 
       updateAction(transferId: string, action: string) {
-            this.demoTransferRequestData = this.demoTransferRequestData.map((tr) => {
+            this.transferRequestList.set(this.transferRequestList().map((tr) => {
                   if (transferId === tr.transferId) {
                         tr.status = action;
                         if (action === 'Approved') {
@@ -67,11 +65,11 @@ export class TransferService {
                         }
                   }
                   return tr;
-            });
+            }));
       }
 
       getTransferLogs(studentId: string) {
-            const updateTransferData = this.demoTransferRequestData
+            const updateTransferData = this.transferRequestList()
                   .filter((tr) => studentId === tr.studentId)
                   .map((tr) => {
                         const transferSchool = this.schoolService.getSchoolBySchoolId(tr.transferSchoolId);

@@ -1,38 +1,34 @@
 import { Injectable, signal } from '@angular/core';
-import { Student } from '../models/student.model';
-import { LocalStorageService } from './local-storage.service';
 import { SchoolService } from './school.service';
-import { Observable, of } from 'rxjs';
-
+import { studentData } from '../models/demoData';
+import { Student } from '../models/data.model';
 @Injectable({
       providedIn: 'root'
 })
 export class StudentService {
-      private demoStudentData = signal<Student[]>([
-            { studentId: "ST1", name: "Aarav Sharma", schoolId: "SC1", transferStatus: false },
-            { studentId: "ST2", name: "Ishita Mehta", schoolId: "SC2", transferStatus: false },
-            { studentId: "ST3", name: "Rohan Verma", schoolId: "SC1", transferStatus: false },
-      ]);
-      constructor(
-            private localStorageService: LocalStorageService,
-            private schoolService: SchoolService
-      ) { }
+      private studentList = signal<Student[]>(studentData);
+      constructor(private schoolService: SchoolService) { }
 
       getStudentList() {
-            const loginId = this.localStorageService.getItem('loginId');
-            if (loginId) {
-                  const schoolData = this.schoolService.getSchoolByLoginId(loginId);
-                  if (schoolData)
-                        return this.demoStudentData().filter((st) => st.schoolId === schoolData?.schoolId);
+            try {
+                  const loginId = localStorage.getItem('loginId');
+                  if (loginId) {
+                        const schoolData = this.schoolService.getSchoolByLoginId(loginId);
+                        if (schoolData)
+                              return this.studentList().filter((st) => st.schoolId === schoolData?.schoolId);
+                  }
+                  return [];
+            } catch (error) {
+                  console.error({ error });
+                  return [];
             }
-            return [];
       }
 
-      async getStudent(studentId: string) {
+      getStudent(studentId: string) {
             try {
-                  const result = this.demoStudentData().find((s) => s.studentId === studentId);
+                  const result = this.studentList().find((s) => s.studentId === studentId);
                   if (result) {
-                        const currentSchool = await this.schoolService.getSchoolBySchoolId(result.schoolId);
+                        const currentSchool = this.schoolService.getSchoolBySchoolId(result.schoolId);
                         if (currentSchool) {
                               return { name: result.name, currentSchool: currentSchool?.name };
                         }
@@ -47,14 +43,14 @@ export class StudentService {
       addStudent(studentData: any) {
             try {
                   const { name } = studentData;
-                  const studentId = 'ST' + (this.demoStudentData().length + 1);
-                  const loginId = this.localStorageService.getItem('loginId');
+                  const studentId = 'ST' + (this.studentList().length + 1);
+                  const loginId = localStorage.getItem('loginId');
 
                   if (loginId) {
                         const schoolData = this.schoolService.getSchoolByLoginId(loginId);
                         if (schoolData) {
                               const newData = { studentId, name, schoolId: schoolData.schoolId, transferStatus: false };
-                              this.demoStudentData.update(values => {
+                              this.studentList.update(values => {
                                     return [...values, newData];
                               });
                               return newData;
@@ -69,14 +65,13 @@ export class StudentService {
 
       transferStudent(schoolId: string, studentId: string) {
             try {
-                  this.demoStudentData.set(this.demoStudentData().map((st) => {
+                  this.studentList.set(this.studentList().map((st) => {
                         if (st.studentId === studentId) {
                               st.schoolId = schoolId,
                                     st.transferStatus = false
                         }
                         return st;
                   }))
-
                   return studentId;
             } catch (error) {
                   console.error({ error });
@@ -85,9 +80,9 @@ export class StudentService {
 
       }
 
-      updateStudentTransferStatus(schoolId: string, studentId: string): Observable<any> {
+      updateStudentTransferStatus(schoolId: string, studentId: string) {
             try {
-                  const result = this.demoStudentData()
+                  const result = this.studentList()
                         .filter((st) => st.schoolId === schoolId)
                         .map((st) => {
                               if (st.studentId === studentId) {
@@ -95,11 +90,11 @@ export class StudentService {
                               }
                               return st;
                         });
-                  this.demoStudentData.set(result);
-                  return of(this.demoStudentData());
+                  this.studentList.set(result);
+                  return this.studentList();
             } catch (error) {
                   console.error({ error });
-                  return of(null);
+                  return null;
             }
       }
 }
