@@ -10,6 +10,34 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+// Clip
+.chip {
+    display: inline-flex;
+    flex-direction: row;
+    cursor: default;
+    height: 36px;
+    outline: none;
+    padding: 0;
+    font-size: 14px;
+    color: #333333;
+    font-family: "Open Sans", sans-serif;
+    white-space: nowrap;
+    align-items: center;
+    border-radius: 16px;
+    vertical-align: middle;
+    text-decoration: none;
+    justify-content: center;
+}
+
+.chip-content {
+    cursor: inherit;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    white-space: nowrap;
+    padding-left: 12px;
+    padding-right: 12px;
+}
 
 .Approved {
     background-color: #c2efc2;
@@ -26,6 +54,7 @@ body {
     border: 1px solid #5c5d00;
 }
 
+// Validation
 .invalid-feedback {
     color: rgb(114, 0, 0);
     font-size: 12px;
@@ -35,4 +64,23 @@ body {
 .is-invalid {
     border-color: #a30000 !important;
 
+}
+
+// Dashboard table
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+    padding: 12px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.dashboard-table th {
+    background-color: #e0e0e0; // light gray
+    color: #333;
 }

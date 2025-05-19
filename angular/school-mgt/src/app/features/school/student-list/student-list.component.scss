@@ -20,23 +20,6 @@
       color: #333;
 }
 
-.menu {
-      display: flex;
-      gap: 20px;
-}
-
-.menu a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      padding: 6px 12px;
-}
-
-.menu a:hover {
-      background-color: #ccc;
-      border-radius: 4px;
-}
-
 .header-buttons button {
       margin-left: 12px;
       padding: 8px 16px;
@@ -98,24 +81,6 @@
       }
 }
 
-.dashboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      background-color: white;
-}
-
-.dashboard-table th,
-.dashboard-table td {
-      padding: 12px;
-      border: 1px solid #ccc;
-      text-align: left;
-}
-
-.dashboard-table th {
-      background-color: #e0e0e0; // light gray
-      color: #333;
-}
-
 .action {
       display: flex;
       justify-content: space-evenly;
@@ -125,34 +90,4 @@
 [mat-mini-fab] {
       background-color: rgb(190, 190, 190) !important;
       color: black;
-}
-
-.chip {
-      display: inline-flex;
-      flex-direction: row;
-      // background-color: #e5e5e5;
-      // border: none;
-      cursor: default;
-      height: 36px;
-      outline: none;
-      padding: 0;
-      font-size: 14px;
-      color: #333333;
-      font-family: "Open Sans", sans-serif;
-      white-space: nowrap;
-      align-items: center;
-      border-radius: 16px;
-      vertical-align: middle;
-      text-decoration: none;
-      justify-content: center;
-}
-
-.chip-content {
-      cursor: inherit;
-      display: flex;
-      align-items: center;
-      user-select: none;
-      white-space: nowrap;
-      padding-left: 12px;
-      padding-right: 12px;
 }
