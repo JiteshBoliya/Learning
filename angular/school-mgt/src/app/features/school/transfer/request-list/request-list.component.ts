@@ -14,7 +14,9 @@ export class RequestListComponent implements OnInit {
   ngOnInit(): void {
     const loginId = localStorage.getItem('loginId');
     if (loginId) {
-      this.transferRequestList.set(this.transferService.getTransferRequestList(loginId));
+      const result = this.transferService.getTransferRequestList(loginId);
+      if (result)
+        this.transferRequestList.set(result);
     }
   }
 }

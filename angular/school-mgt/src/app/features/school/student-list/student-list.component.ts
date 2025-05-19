@@ -13,7 +13,7 @@ import { Student } from '../../../core/models/data.model';
   styleUrl: './student-list.component.scss'
 })
 export class StudentListComponent implements OnInit {
-  students = signal<Student[]>([]);
+  studentList = signal<Student[]>([]);
 
   constructor(
     private dialog: MatDialog,
@@ -21,7 +21,7 @@ export class StudentListComponent implements OnInit {
 
   ngOnInit(): void {
     const res = this.studentService.getStudentList();
-    this.students.set(res);
+    this.studentList.set(res);
   }
 
   openAddStudentDialog() {
@@ -29,7 +29,7 @@ export class StudentListComponent implements OnInit {
       width: '1000px'
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.students.update(values => {
+        this.studentList.update(values => {
           return [...values, result];
         });
       }
@@ -53,7 +53,7 @@ export class StudentListComponent implements OnInit {
       data: student
     }).afterClosed().subscribe(result => {
       if (result) {
-        this.students.set(result);
+        this.studentList.set(result);
       }
     });
   }

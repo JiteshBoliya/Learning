@@ -82,16 +82,15 @@ export class StudentService {
 
       updateStudentTransferStatus(schoolId: string, studentId: string) {
             try {
-                  const result = this.studentList()
-                        .filter((st) => st.schoolId === schoolId)
+                  this.studentList.set(this.studentList()
                         .map((st) => {
                               if (st.studentId === studentId) {
                                     return { ...st, transferStatus: true, };
                               }
                               return st;
-                        });
-                  this.studentList.set(result);
-                  return this.studentList();
+                        }));
+
+                  return this.studentList().filter((st) => st.schoolId === schoolId);
             } catch (error) {
                   console.error({ error });
                   return null;

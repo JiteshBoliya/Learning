@@ -11,15 +11,24 @@ import { TransferService } from '../../../../core/services/transfer.service';
 export class IncomingRequestListComponent implements OnInit {
   inboxRequestList = signal<any[]>([]);
   constructor(private transferService: TransferService) { }
-
+  loginId = localStorage.getItem('loginId');
   ngOnInit(): void {
-    const loginId = localStorage.getItem('loginId');
-    if (loginId) {
-      this.inboxRequestList.set(this.transferService.inboxList(loginId));
-    }
+    this.loadList();
   }
 
   onAction(transferId: string, action: string) {
-    this.transferService.updateAction(transferId, action);
+    const result = this.transferService.updateAction(transferId, action);
+    if (result) {
+      this.loadList();
+    }
+  }
+
+  loadList() {
+    if (this.loginId) {
+      const result = this.transferService.inboxList(this.loginId);
+      if (result) {
+        this.inboxRequestList.set(result);
+      }
+    }
   }
 }
