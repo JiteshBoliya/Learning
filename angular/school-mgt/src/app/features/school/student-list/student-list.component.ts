@@ -20,9 +20,8 @@ export class StudentListComponent implements OnInit {
     private studentService: StudentService) { }
 
   ngOnInit(): void {
-    this.studentService.getStudentList().subscribe((res) => {
-      this.students.set(res);
-    })
+    const res = this.studentService.getStudentList();
+    this.students.set(res);
   }
 
   openAddStudentDialog() {

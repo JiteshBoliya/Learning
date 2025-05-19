@@ -18,51 +18,52 @@ export class StudentService {
             private schoolService: SchoolService
       ) { }
 
-      getStudentList(): Observable<any> {
+      getStudentList() {
             const loginId = this.localStorageService.getItem('loginId');
-            const schoolData = this.schoolService.getSchoolByLoginId(loginId ? loginId : '');
-            const resultData = this.demoStudentData().filter((st) => st.schoolId === schoolData?.schoolId);
-            return of(resultData);
+            if (loginId) {
+                  const schoolData = this.schoolService.getSchoolByLoginId(loginId);
+                  if (schoolData)
+                        return this.demoStudentData().filter((st) => st.schoolId === schoolData?.schoolId);
+            }
+            return [];
       }
 
       async getStudent(studentId: string) {
             try {
                   const result = this.demoStudentData().find((s) => s.studentId === studentId);
-                  if (!result) return null;
-
-                  const currentSchool = await this.schoolService.getSchoolBySchoolId(result.schoolId);
-
-                  const studentDetails = {
-                        name: result.name,
-                        currentSchool: currentSchool?.name,
-                        // div: result.div,
+                  if (result) {
+                        const currentSchool = await this.schoolService.getSchoolBySchoolId(result.schoolId);
+                        if (currentSchool) {
+                              return { name: result.name, currentSchool: currentSchool?.name };
+                        }
                   }
-                  return studentDetails;
+                  return null;
             } catch (error) {
                   console.error({ error });
                   return null;
             }
       }
 
-      addStudent(studentData: any): Observable<any> {
+      addStudent(studentData: any) {
             try {
-                  // Get data
                   const { name } = studentData;
-                  // Generate student id
                   const studentId = 'ST' + (this.demoStudentData().length + 1);
-                  // Get the login id
                   const loginId = this.localStorageService.getItem('loginId');
-                  // Get school data by loginId
-                  const schoolData = this.schoolService.getSchoolByLoginId(loginId ? loginId : '');
-                  if (!schoolData) return of(null);
-                  // Store the student data
-                  const resultData = { studentId, name, schoolId: schoolData.schoolId, transferStatus: false };
-                  this.demoStudentData().push(resultData);
 
-                  return of(resultData);
+                  if (loginId) {
+                        const schoolData = this.schoolService.getSchoolByLoginId(loginId);
+                        if (schoolData) {
+                              const newData = { studentId, name, schoolId: schoolData.schoolId, transferStatus: false };
+                              this.demoStudentData.update(values => {
+                                    return [...values, newData];
+                              });
+                              return newData;
+                        }
+                  }
+                  return null
             } catch (error) {
                   console.error({ error });
-                  return of(null);
+                  return null;
             }
       }
 
