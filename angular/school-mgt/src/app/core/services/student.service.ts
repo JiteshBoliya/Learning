@@ -2,18 +2,22 @@ import { Injectable, signal } from '@angular/core';
 import { SchoolService } from './school.service';
 import { studentData } from '../data/demoData';
 import { Student } from '../models/data.model';
+import { AuthService } from './auth.service';
 @Injectable({
       providedIn: 'root'
 })
 export class StudentService {
       private studentList = signal<Student[]>(studentData);
-      constructor(private schoolService: SchoolService) { }
+      constructor(
+            private schoolService: SchoolService,
+            private authService: AuthService
+      ) { }
 
       getStudentList() {
             try {
-                  const loginId = localStorage.getItem('loginId');
-                  if (loginId) {
-                        const schoolData = this.schoolService.getSchoolByLoginId(loginId);
+                  const userData = this.authService.getUserInfo();
+                  if (userData) {
+                        const schoolData = this.schoolService.getSchoolByLoginId(userData.loginId);
                         if (schoolData)
                               return this.studentList().filter((st) => st.schoolId === schoolData?.schoolId);
                   }
@@ -44,10 +48,9 @@ export class StudentService {
             try {
                   const { name } = studentData;
                   const studentId = 'ST' + (this.studentList().length + 1);
-                  const loginId = localStorage.getItem('loginId');
-
-                  if (loginId) {
-                        const schoolData = this.schoolService.getSchoolByLoginId(loginId);
+                  const userData = this.authService.getUserInfo();
+                  if (userData) {
+                        const schoolData = this.schoolService.getSchoolByLoginId(userData.loginId);
                         if (schoolData) {
                               const newData = { studentId, name, schoolId: schoolData.schoolId, transferStatus: false };
                               this.studentList.update(values => {

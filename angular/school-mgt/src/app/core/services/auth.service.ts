@@ -2,14 +2,22 @@ import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { authData } from '../data/demoData';
 import { type Auth } from '../models/data.model';
-
+interface DecodedToken {
+      loginId: string;
+      username: string;
+      roles: string;
+      exp: number;
+}
 @Injectable({
       providedIn: 'root'
 })
+
 export class AuthService {
       private authList = signal<Auth[]>(authData);
-      constructor(private router: Router) { }
+      private readonly TOKEN_KEY = 'auth_token';
       isLoggedIn = false;
+
+      constructor(private router: Router) { }
 
       isAuthenticated(): boolean {
             return this.isLoggedIn;
@@ -24,10 +32,9 @@ export class AuthService {
 
                   if (result) {
                         this.isLoggedIn = true;
+                        const token = this.generateToken({ loginId: result.loginId, roles: result.role, username });
+                        this.storeToken(token);
 
-                        localStorage.setItem('username', username);
-                        localStorage.setItem('role', result.role ? result.role : '');
-                        localStorage.setItem('loginId', result.loginId ? result.loginId : '');
 
                         result.role === "admin" ?
                               this.router.navigate(['admin']) :
@@ -64,5 +71,67 @@ export class AuthService {
             }
       }
 
+      private generateToken(user: any): string {
+            const tokenData: DecodedToken = {
+                  loginId: user.loginId,
+                  username: user.username,
+                  roles: user.roles,
+                  exp: Math.floor(Date.now() / 1000) + 3600
+            };
+            return btoa(JSON.stringify(tokenData));
+      }
 
+      private storeToken(token: string): void {
+            localStorage.setItem(this.TOKEN_KEY, token);
+      }
+
+      private getToken(): string | null {
+            return localStorage.getItem(this.TOKEN_KEY);
+      }
+
+      private isTokenValid(): boolean {
+            const token = this.getToken();
+
+            if (!token) {
+                  return false;
+            }
+            try {
+                  const decodedToken = this.decodeToken(token);
+                  return decodedToken.exp * 1000 > Date.now();
+            } catch (error) {
+                  console.error('Token validation error', error);
+                  return false;
+            }
+      }
+
+      private decodeToken(token = this.getToken()): DecodedToken {
+            if (!token) {
+                  throw new Error('No token found');
+            }
+
+            try {
+                  return JSON.parse(atob(token));
+            } catch (error) {
+                  console.error('Token decoding failed', error);
+                  throw new Error('Invalid token format');
+            }
+      }
+
+      getUserInfo() {
+            try {
+                  return this.decodeToken();
+            } catch {
+                  return null;
+            }
+      }
+
+      hasRole(role: string): boolean {
+            try {
+
+                  const decodedToken = this.decodeToken();
+                  return decodedToken.roles?.includes(role) || false;
+            } catch {
+                  return false;
+            }
+      }
 }
