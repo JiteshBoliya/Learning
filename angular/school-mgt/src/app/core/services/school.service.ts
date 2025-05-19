@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { AuthService } from './auth.service';
-import { schoolData } from '../models/demoData';
+import { schoolData } from '../data/demoData';
 import { type School } from '../models/data.model';
 
 @Injectable({

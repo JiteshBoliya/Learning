@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { Router } from '@angular/router';
-import { authData } from '../models/demoData';
+import { authData } from '../data/demoData';
 import { type Auth } from '../models/data.model';
 
 @Injectable({
@@ -9,6 +9,11 @@ import { type Auth } from '../models/data.model';
 export class AuthService {
       private authList = signal<Auth[]>(authData);
       constructor(private router: Router) { }
+      isLoggedIn = false;
+
+      isAuthenticated(): boolean {
+            return this.isLoggedIn;
+      }
 
       login(loginData: Auth) {
             try {
@@ -18,6 +23,8 @@ export class AuthService {
                         && dl.password === password);
 
                   if (result) {
+                        this.isLoggedIn = true;
+
                         localStorage.setItem('username', username);
                         localStorage.setItem('role', result.role ? result.role : '');
                         localStorage.setItem('loginId', result.loginId ? result.loginId : '');
@@ -35,6 +42,7 @@ export class AuthService {
 
       logout() {
             try {
+                  this.isLoggedIn = false;
                   localStorage.clear();
                   this.router.navigate(['auth']);
             } catch (error) {

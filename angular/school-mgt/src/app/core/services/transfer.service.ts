@@ -2,7 +2,6 @@ import { Injectable, signal } from '@angular/core';
 import { SchoolService } from './school.service';
 import { StudentService } from './student.service';
 
-
 @Injectable({
       providedIn: 'root'
 })

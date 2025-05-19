@@ -1,10 +1,16 @@
-.tab-container {
-      margin: 20px;
-      border: 2px solid #d1d1d1;
-      padding: 10px;
-      border-radius: 10px;
-}
-
 .container {
       height: calc(100vh - 85px);
+}
+
+.dashboard-container {
+      font-family: Arial, sans-serif;
+      height: calc(100vh - 85px);
+      background-color: #f1f1f1;
+      padding: 10px;
+}
+
+.tab-container {
+      border: 1px solid #838383;
+      padding: 10px;
+      border-radius: 10px;
 }
