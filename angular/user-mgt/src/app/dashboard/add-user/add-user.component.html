@@ -1,0 +1,25 @@
+<div class="add-student-card">
+      <h2 class="add-student-title">Add User</h2>
+      <form>
+            <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" formControlName="name" id="name" name="name" required class="form-input" />
+            </div>
+
+            <div class="form-group">
+                  <label for="contactNo">Contact no</label>
+                  <input type="number" formControlName="contactNo" id="contactNo" name="contactNo" required
+                        class="form-input" />
+            </div>
+
+            <div class="form-group">
+                  <label for="name">Email</label>
+                  <input type="email" formControlName="email" id="email" name="email" required class="form-input" />
+            </div>
+
+            <div class="form-actions">
+                  <button type="submit" class="add-student-button add ">Add</button>
+                  <button type="button" class="add-student-button close" (click)="onCancel()">Close</button>
+            </div>
+      </form>
+</div>

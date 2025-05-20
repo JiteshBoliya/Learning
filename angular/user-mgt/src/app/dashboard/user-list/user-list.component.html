@@ -1,0 +1,44 @@
+<app-navbar />
+<div class="dashboard-container">
+      <div class="tab-container">
+            <header class="dashboard-header">
+                  <div class="button-container">
+                        <button class="add-button" (click)="openAddStudentDialog()">+ Add User</button>
+                  </div>
+            </header>
+            <table class="dashboard-table">
+                  <thead>
+                        <tr>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Contact no</th>
+                              <th>Email</th>
+                              <th>Edit</th>
+                              <th>Remove</th>
+                        </tr>
+                  </thead>
+                  <tbody>
+                        @for( user of userList(); track user) {
+                        <tr>
+                              <td>{{ user.id }}</td>
+                              <td>{{ user.name }}</td>
+                              <td>{{ user.mobileNo }}</td>
+                              <td>{{ user.email }}</td>
+                              <td>
+                                    <button mat-stroked-button class="edit">
+                                          <mat-icon>edit</mat-icon>
+                                          Edit
+                                    </button>
+                              </td>
+                              <td>
+                                    <button mat-stroked-button class="delete">
+                                          <mat-icon>delete</mat-icon>
+                                          Delete </button>
+                              </td>
+                        </tr>
+                        }
+
+                  </tbody>
+            </table>
+      </div>
+</div>

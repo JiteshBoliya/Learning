@@ -1,0 +1,124 @@
+.header {
+      background-color: #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tab-container {
+      border: 1px solid #838383;
+      padding: 10px;
+      border-radius: 10px;
+}
+
+.header-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+}
+
+.header-buttons button {
+      margin-left: 12px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #555;
+      color: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+}
+
+.header-buttons button:hover {
+      background-color: #333;
+}
+
+.header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+}
+
+.dashboard-container {
+      font-family: Arial, sans-serif;
+      height: calc(100vh - 85px);
+      background-color: #f1f1f1;
+      padding: 10px;
+}
+
+.dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+}
+
+.title {
+      color: #2e7d32; // dark green
+      font-size: 24px;
+      margin: 0;
+}
+
+.button-container {
+      width: 230px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.add-button {
+      background-color: #66bb6a; // medium green
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+
+      &:hover {
+            background-color: #388e3c; // darker green     
+      }
+}
+
+// Dashboard table
+.dashboard-table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: white;
+}
+
+.dashboard-table th,
+.dashboard-table td {
+      padding: 12px;
+      border: 1px solid #ccc;
+      text-align: left;
+}
+
+.dashboard-table th {
+      background-color: #e0e0e0;
+      color: #333;
+}
+
+[mat-mini-fab] {
+      background-color: rgb(190, 190, 190) !important;
+      color: black;
+}
+
+.edit {
+      color: blueviolet !important;
+      border-radius: 5px;
+
+      &:hover {
+            background-color: blueviolet;
+            color: white !important;
+      }
+}
+
+.delete {
+      color: red !important;
+      border-radius: 5px;
+
+      &:hover {
+            background-color: red;
+            color: white !important;
+      }
+}
