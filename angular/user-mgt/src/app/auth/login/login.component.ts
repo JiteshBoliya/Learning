@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+// import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../core/service/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
+  // private _snackBar = inject(MatSnackBar);
   loginForm!: FormGroup;
 
   ngOnInit(): void {
@@ -19,9 +21,25 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   onSubmit() {
-    this.router.navigate(['/user-list']);
+    try {
+      if (this.loginForm.invalid) {
+        return;
+      }
+      const loginData = this.loginForm.value;
+      this.authService.login(loginData)?.subscribe((res) => {
+        this.loginForm.reset();
+        this.router.navigate(['/user-list']);
+      });
+      // snackBar.open('Username or password is incorrect...!');
+      // alert("Username or password is incorrect...!");
+    } catch (error) {
+      console.error({ error });
+    }
   }
 }

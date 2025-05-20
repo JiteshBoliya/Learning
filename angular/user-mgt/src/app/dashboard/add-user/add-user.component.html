@@ -1,6 +1,6 @@
 <div class="add-student-card">
       <h2 class="add-student-title">Add User</h2>
-      <form>
+      <form [formGroup]="userForm">
             <div class="form-group">
                   <label for="name">Name</label>
                   <input type="text" formControlName="name" id="name" name="name" required class="form-input" />
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-actions">
-                  <button type="submit" class="add-student-button add ">Add</button>
+                  <button type="submit" class="add-student-button add " (click)="onAdd()">Add</button>
                   <button type="button" class="add-student-button close" (click)="onCancel()">Close</button>
             </div>
       </form>
