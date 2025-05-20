@@ -1,6 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from '../user-form/user-form.component';
+import { UserFormComponent } from '../user-form/user-form.component';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,6 +21,11 @@ import { UserService } from '../../core/service/user.service';
 })
 export class UserListComponent implements OnInit {
   userList = signal<any[]>([]);
+  private _snackBar = inject(MatSnackBar);
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action);
+  }
 
   constructor(
     private dialog: MatDialog,
@@ -27,40 +33,39 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getItems().subscribe((res) => {
+    this.userService.getUsers().subscribe((res) => {
       this.userList.set(res)
     })
   }
 
   openAddUserDialog() {
-    this.dialog.open(AddUserComponent, {
+    this.dialog.open(UserFormComponent, {
       width: '1000px'
     }).afterClosed().subscribe((res) => {
       if (res) {
         this.userList.update(values => {
           return [...values, res];
         });
+        this.openSnackBar("User data Added", "Ok");
       }
     })
   }
 
   openUpdateUserDialog(data: any) {
-    this.dialog.open(AddUserComponent, {
+    this.dialog.open(UserFormComponent, {
       width: '1000px'
       , data
     }).afterClosed().subscribe((res) => {
       if (res) {
-        console.log('callled', res);
-
+        this.openSnackBar("User data updated", "Ok");
       }
     })
   }
 
   deleteUser(id: string) {
     if (confirm("Sure you want to delete..?")) {
-      this.userService.deleteItem(id).subscribe((res) => {
-        console.log("deleted", res);
-
+      this.userService.deleteUser(id).subscribe((res) => {
+        this.openSnackBar("User data deleted", "Ok");
       })
     }
   }

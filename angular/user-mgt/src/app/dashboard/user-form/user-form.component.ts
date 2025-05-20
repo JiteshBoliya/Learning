@@ -10,11 +10,11 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
   templateUrl: './user-form.component.html',
   styleUrl: './user-form.component.scss'
 })
-export class AddUserComponent implements OnInit {
+export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
 
   constructor(
-    private dialogRef: MatDialogRef<AddUserComponent>,
+    private dialogRef: MatDialogRef<UserFormComponent>,
     private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
@@ -31,11 +31,11 @@ export class AddUserComponent implements OnInit {
   onSubmit() {
     if (this.userForm.valid) {
       if (this.data) {
-        this.userService.updateItem(this.data.id, this.userForm.value).subscribe((res) => {
+        this.userService.updateUser(this.data.id, this.userForm.value).subscribe((res) => {
           this.dialogRef.close(res);
         });
       } else {
-        this.userService.addItem(this.userForm.value).subscribe((res) => {
+        this.userService.addUser(this.userForm.value).subscribe((res) => {
           this.dialogRef.close(res);
         })
       }
