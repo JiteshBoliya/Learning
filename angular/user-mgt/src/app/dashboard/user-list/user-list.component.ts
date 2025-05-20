@@ -1,6 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddUserComponent } from '../add-user/add-user.component';
+import { AddUserComponent } from '../user-form/user-form.component';
 import { NavbarComponent } from "../../shared/navbar/navbar.component";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -10,7 +10,11 @@ import { UserService } from '../../core/service/user.service';
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [NavbarComponent, CommonModule, MatIconModule, MatButtonModule],
+  imports: [
+    NavbarComponent,
+    CommonModule,
+    MatIconModule,
+    MatButtonModule],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
@@ -28,8 +32,8 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  openAddStudentDialog() {
-    const studentDialogRef = this.dialog.open(AddUserComponent, {
+  openAddUserDialog() {
+    this.dialog.open(AddUserComponent, {
       width: '1000px'
     }).afterClosed().subscribe((res) => {
       if (res) {
@@ -38,6 +42,27 @@ export class UserListComponent implements OnInit {
         });
       }
     })
+  }
+
+  openUpdateUserDialog(data: any) {
+    this.dialog.open(AddUserComponent, {
+      width: '1000px'
+      , data
+    }).afterClosed().subscribe((res) => {
+      if (res) {
+        console.log('callled', res);
+
+      }
+    })
+  }
+
+  deleteUser(id: string) {
+    if (confirm("Sure you want to delete..?")) {
+      this.userService.deleteItem(id).subscribe((res) => {
+        console.log("deleted", res);
+
+      })
+    }
   }
 
 }

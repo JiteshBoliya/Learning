@@ -3,7 +3,7 @@
       <div class="tab-container">
             <header class="dashboard-header">
                   <div class="button-container">
-                        <button class="add-button" (click)="openAddStudentDialog()">+ Add User</button>
+                        <button class="add-button" (click)="openAddUserDialog()">+ Add User</button>
                   </div>
             </header>
             <table class="dashboard-table">
@@ -25,19 +25,18 @@
                               <td>{{ user.contactNo }}</td>
                               <td>{{ user.email }}</td>
                               <td>
-                                    <button mat-stroked-button class="edit">
+                                    <button mat-stroked-button class="edit" (click)="openUpdateUserDialog(user)">
                                           <mat-icon>edit</mat-icon>
                                           Edit
                                     </button>
                               </td>
                               <td>
-                                    <button mat-stroked-button class="delete">
+                                    <button mat-stroked-button class="delete" (click)="deleteUser(user.id)">
                                           <mat-icon>delete</mat-icon>
                                           Delete </button>
                               </td>
                         </tr>
                         }
-
                   </tbody>
             </table>
       </div>

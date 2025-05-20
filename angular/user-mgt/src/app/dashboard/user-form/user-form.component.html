@@ -1,5 +1,5 @@
 <div class="add-student-card">
-      <h2 class="add-student-title">Add User</h2>
+      <h2 class="add-student-title">{{data ? 'Update':'Add'}} User</h2>
       <form [formGroup]="userForm">
             <div class="form-group">
                   <label for="name">Name</label>
@@ -18,7 +18,8 @@
             </div>
 
             <div class="form-actions">
-                  <button type="submit" class="add-student-button add " (click)="onAdd()">Add</button>
+                  <button type="submit" class="add-student-button add " (click)="onSubmit()">{{data? 'Update':
+                        'Add'}}</button>
                   <button type="button" class="add-student-button close" (click)="onCancel()">Close</button>
             </div>
       </form>
