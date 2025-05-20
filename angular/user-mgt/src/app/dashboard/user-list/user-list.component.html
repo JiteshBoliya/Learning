@@ -18,9 +18,9 @@
                         </tr>
                   </thead>
                   <tbody>
-                        @for( user of userList(); track user) {
+                        @for( user of userList(); track user; let idx = $index) {
                         <tr>
-                              <td>{{ user.id }}</td>
+                              <td>{{ idx+1 }}</td>
                               <td>{{ user.name }}</td>
                               <td>{{ user.contactNo }}</td>
                               <td>{{ user.email }}</td>

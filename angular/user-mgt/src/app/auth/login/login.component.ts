@@ -36,8 +36,6 @@ export class LoginComponent implements OnInit {
         this.loginForm.reset();
         this.router.navigate(['/user-list']);
       });
-      // snackBar.open('Username or password is incorrect...!');
-      // alert("Username or password is incorrect...!");
     } catch (error) {
       console.error({ error });
     }
