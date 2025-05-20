@@ -12,9 +12,10 @@ import { AuthService } from '../../core/service/auth.service';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 }

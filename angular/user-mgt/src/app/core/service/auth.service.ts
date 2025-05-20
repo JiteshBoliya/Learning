@@ -17,7 +17,6 @@ interface DecodedToken {
 export class AuthService {
   private firestore: Firestore = inject(Firestore);
   private adminRef = collection(this.firestore, 'login');
-  private router!: Router;
   private readonly TOKEN_KEY = 'auth_token';
   private isLoggedIn = false;
 
@@ -78,7 +77,6 @@ export class AuthService {
   logout() {
     this.isLoggedIn = false;
     localStorage.clear();
-    this.router.navigate(['/']);
   }
 
   private comparePasswords(plainPassword: string, hashedPassword: string): boolean {

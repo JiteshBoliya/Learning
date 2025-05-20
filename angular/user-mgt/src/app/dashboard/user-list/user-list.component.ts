@@ -43,9 +43,10 @@ export class UserListComponent implements OnInit {
       width: '1000px'
     }).afterClosed().subscribe((res) => {
       if (res) {
-        this.userList.update(values => {
-          return [...values, res];
-        });
+
+        // this.userList.update(values => {
+        //   return [...values, res];
+        // });
         this.openSnackBar("User data Added", "Ok");
       }
     })
