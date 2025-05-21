@@ -1,6 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
-// import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 @Component({
@@ -11,20 +10,23 @@ import { AuthService } from '../../core/service/auth.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent implements OnInit {
-  // private _snackBar = inject(MatSnackBar);
   loginForm!: FormGroup;
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
+
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/user-list']);
+    }
+
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
   }
-
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) { }
 
   onSubmit() {
     try {

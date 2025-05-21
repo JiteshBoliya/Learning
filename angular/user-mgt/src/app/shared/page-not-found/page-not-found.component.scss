@@ -1,0 +1,36 @@
+.container {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #f8f9fa;
+      text-align: center;
+}
+
+h1 {
+      font-size: 5rem;
+      color: #343a40;
+      margin: 0px;
+}
+
+p {
+      font-size: 1.5rem;
+      color: #6c757d;
+      margin: 20px 0;
+}
+
+button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+}
+
+button:hover {
+      background-color: #0056b3;
+}
