@@ -54,6 +54,7 @@ export class AuthService {
         })
       )
     } catch (error) {
+      console.log('called');
       console.error({ error });
       return null;
     }

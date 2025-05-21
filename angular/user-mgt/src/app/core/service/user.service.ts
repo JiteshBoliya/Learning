@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserService {
       private firestore: Firestore = inject(Firestore);
       private userRef = collection(this.firestore, 'user');
-      private _snackBar = inject(MatSnackBar);
 
       addUser(user: Omit<User, 'id' | 'createdAt' | 'updatedAt'>): Observable<any> {
             const newUser = {
@@ -44,11 +43,6 @@ export class UserService {
       deleteUser(id: string): Observable<void> {
             const userDoc = doc(this.firestore, `user/${id}`);
             return from(deleteDoc(userDoc));
-      }
-
-
-      openSnackBar(message: string, action: string) {
-            this._snackBar.open(message, action);
       }
 
 }

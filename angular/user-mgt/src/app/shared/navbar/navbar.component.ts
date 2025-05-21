@@ -4,6 +4,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 import { MatIcon } from '@angular/material/icon';
+import { UtilityService } from '../../core/service/utility.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit {
   adminData: any;
   constructor(
     private authService: AuthService,
+    private utilityService: UtilityService,
     private router: Router
   ) { }
 
@@ -26,6 +28,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.utilityService.openSnackBar('Logout Successfully', 'success');
     this.router.navigate(['/']);
   }
 }

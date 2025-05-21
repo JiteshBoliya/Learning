@@ -5,13 +5,34 @@
                   <div class=" form-group">
                         <label for="username">Username</label>
                         <input type="username" formControlName="username" id="username" name="username" required
-                              class="form-input" />
+                              class="form-input" [ngClass]="{ 'is-invalid': submitted && f['username'].errors }" />
+                        @if (submitted && f['username'].errors ) {
+                        <div class="invalid-feedback">
+                              @if (f['username'].errors['required']) {
+                              <p>Username is required</p>
+                              }
+                        </div>
+                        }
 
                   </div>
                   <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" formControlName="password" id="password" name="password" required
-                              class="form-input" />
+                              class="form-input" [ngClass]="{ 'is-invalid': submitted && f['password'].errors }" />
+                        @if (submitted && f['password'].errors ) {
+                        <div class="invalid-feedback">
+                              @if (f['password'].errors['required']) {
+                              <p>password is required</p>
+                              }
+                              @else if (f['password'].errors['minlength']) {
+                              <p>Password must be at least 8 characters</p>
+                              }
+                              @else if (f['password'].errors['pattern']) {
+                              <p>Password must contain at least one uppercase letter, one lowercase letter,
+                                    one number and one special character</p>
+                              }
+                        </div>
+                        }
 
                   </div>
                   <div class="form-group">

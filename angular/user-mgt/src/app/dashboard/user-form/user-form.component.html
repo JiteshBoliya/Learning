@@ -3,18 +3,50 @@
       <form [formGroup]="userForm">
             <div class="form-group">
                   <label for="name">Name</label>
-                  <input type="text" formControlName="name" id="name" name="name" required class="form-input" />
+                  <input type="text" formControlName="name" id="name" name="name" required class="form-input"
+                        [ngClass]="{ 'is-invalid': submitted && f['name'].errors }" />
+                  @if (submitted && f['name'].errors ) {
+                  <div class="invalid-feedback">
+                        @if (f['name'].errors['required']) {
+                        <p>Name is required</p>
+                        }
+                        @else if (f['name'].errors['minlength']) {
+                        <p>Name must be at least 2 characters</p>
+                        }
+                  </div>
+                  }
             </div>
 
             <div class="form-group">
                   <label for="contactNo">Contact no</label>
                   <input type="number" formControlName="contactNo" id="contactNo" name="contactNo" required
-                        class="form-input" />
+                        class="form-input" [ngClass]="{ 'is-invalid': submitted && f['contactNo'].errors }" />
+                  @if (submitted && f['contactNo'].errors ) {
+                  <div class="invalid-feedback">
+                        @if (f['contactNo'].errors['required']) {
+                        <p>Contact number is required</p>
+                        }
+                        @else if (f['contactNo'].errors['min'] || f['contactNo'].errors['max']) {
+                        <p>Contact number must be 10 digits</p>
+                        }
+                  </div>
+                  }
             </div>
 
             <div class="form-group">
                   <label for="name">Email</label>
-                  <input type="email" formControlName="email" id="email" name="email" required class="form-input" />
+                  <input type="email" formControlName="email" id="email" name="email" required class="form-input"
+                        [ngClass]="{ 'is-invalid': submitted && f['email'].errors }" />
+                  @if (submitted && f['email'].errors ) {
+                  <div class="invalid-feedback">
+                        @if (f['email'].errors['required']) {
+                        <p>Email Id is required</p>
+                        }
+                        @else if (f['email'].errors['email']) {
+                        <p>Email Id must be valid</p>
+                        }
+                  </div>
+                  }
             </div>
 
             <div class="form-actions">

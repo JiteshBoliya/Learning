@@ -9,3 +9,30 @@ body {
       margin: 0;
       font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+// Validation
+.invalid-feedback {
+      color: rgb(250, 0, 0);
+      font-size: 12px;
+
+      p {
+            margin: 0px;
+      }
+}
+
+.is-invalid {
+      border-color: #ff0000 !important;
+
+}
+
+
+// Snackbar
+.success {
+      --mdc-snackbar-container-color: green;
+      --mat-mdc-snack-bar-button-color: white;
+}
+
+.error {
+      --mdc-snackbar-container-color: rgb(128, 0, 0);
+      --mat-mdc-snack-bar-button-color: white;
+}

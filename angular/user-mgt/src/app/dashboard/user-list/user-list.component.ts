@@ -8,6 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/service/user.service';
 import { User } from '../../core/models/data.model';
+import { UtilityService } from '../../core/service/utility.service';
 
 @Component({
   selector: 'app-user-list',
@@ -25,7 +26,8 @@ export class UserListComponent implements OnInit {
 
   constructor(
     private dialog: MatDialog,
-    private userService: UserService
+    private userService: UserService,
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit(): void {
@@ -50,7 +52,7 @@ export class UserListComponent implements OnInit {
   deleteUser(id: string) {
     if (confirm("Sure you want to delete..?")) {
       this.userService.deleteUser(id);
-      this.userService.openSnackBar("User data deleted", "Ok");
+      this.utilityService.openSnackBar("User data deleted", 'success');
     }
   }
 
