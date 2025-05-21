@@ -31,9 +31,15 @@ export class UserListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userService.getUsers().subscribe((res) => {
-      this.userList.set(res)
-    })
+    this.userService.getUsers().subscribe({
+      next: (res) => {
+        this.userList.set(res)
+      },
+      error: (err) => {
+        console.error('Failed to load data', err.message);
+        this.utilityService.openSnackBar(err.message, 'error');
+      }
+    });
   }
 
   openAddUserDialog() {
@@ -51,8 +57,15 @@ export class UserListComponent implements OnInit {
 
   deleteUser(id: string) {
     if (confirm("Sure you want to delete..?")) {
-      this.userService.deleteUser(id);
-      this.utilityService.openSnackBar("User data deleted", 'success');
+      this.userService.deleteUser(id).subscribe({
+        next: () => {
+          this.utilityService.openSnackBar("User data deleted", 'success');
+        },
+        error: (err) => {
+          console.error('Failed to delete User:', err.message);
+          this.utilityService.openSnackBar(err.message, 'error');
+        }
+      });
     }
   }
 

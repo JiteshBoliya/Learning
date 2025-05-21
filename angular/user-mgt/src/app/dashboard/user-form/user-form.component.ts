@@ -27,9 +27,7 @@ export class UserFormComponent implements OnInit {
   ngOnInit(): void {
     this.userForm = new FormGroup({
       name: new FormControl(this.data ? this.data.name : '', [Validators.required, Validators.minLength(2),]),
-      contactNo: new FormControl(this.data ? this.data.contactNo : '', [Validators.required,
-        // Validators.maxLength(10), Validators.minLength(10)
-      ]),
+      contactNo: new FormControl(this.data ? this.data.contactNo : '', [Validators.required, Validators.pattern("^[0-9]{10}$")]),
       email: new FormControl(this.data ? this.data.email : '', [Validators.required, Validators.email]),
     });
   }
@@ -38,11 +36,25 @@ export class UserFormComponent implements OnInit {
     this.submitted = true;
     if (this.userForm.valid) {
       if (this.data) {
-        this.userService.updateUser(this.data.id, this.userForm.value);
-        this.utilityService.openSnackBar("User data updated", "success");
+        this.userService.updateUser(this.data.id, this.userForm.value).subscribe({
+          next: () => {
+            this.utilityService.openSnackBar("User data updated", "success");
+          },
+          error: (err) => {
+            console.error('Failed to update User:', err.message);
+            this.utilityService.openSnackBar(err.message, 'error');
+          }
+        });
       } else {
-        this.userService.addUser(this.userForm.value);
-        this.utilityService.openSnackBar("User data Added", "success");
+        this.userService.addUser(this.userForm.value).subscribe({
+          next: () => {
+            this.utilityService.openSnackBar("User data Added", "success");
+          },
+          error: (err) => {
+            console.error('Failed to add User:', err.message);
+            this.utilityService.openSnackBar(err.message, 'error');
+          }
+        });
       }
       this.dialogRef.close();
     }

@@ -26,7 +26,7 @@
                         @if (f['contactNo'].errors['required']) {
                         <p>Contact number is required</p>
                         }
-                        @else if (f['contactNo'].errors['min'] || f['contactNo'].errors['max']) {
+                        @else if (f['contactNo'].errors['pattern']) {
                         <p>Contact number must be 10 digits</p>
                         }
                   </div>
