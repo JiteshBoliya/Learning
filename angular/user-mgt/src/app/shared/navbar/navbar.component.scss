@@ -21,14 +21,18 @@
       }
 }
 
-.active-link {
-      background-color: #66bb6a !important;
+.logout-btn {
+      background-color: transparent;
+      border: 2px solid white;
       color: white !important;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
 }
 
-.logout {
-      background-color: transparent !important;
-      color: white !important;
+.logout-btn:hover {
+      background-color: white !important;
+      color: #1e293b !important;
 }
 
 .spacer {
