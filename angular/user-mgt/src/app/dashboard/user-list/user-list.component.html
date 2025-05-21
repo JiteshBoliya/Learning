@@ -15,12 +15,11 @@
                               <th>Contact no</th>
                               <th>Email</th>
                               <th>Edit</th>
-                              <th>Remove</th>
                         </tr>
                   </thead>
                   <tbody>
                         @for( user of userList(); track user; let idx = $index) {
-                        <tr>
+                        <tr (click)="onSelect(user)">
                               <td>{{ idx+1 }}</td>
                               <td>{{ user.name }}</td>
                               <td>{{ user.contactNo }}</td>
@@ -31,15 +30,10 @@
                                           Edit
                                     </button>
                               </td>
-                              <td>
-                                    <button mat-stroked-button class="delete-btn" (click)="deleteUser(user.id)">
-                                          <mat-icon>delete</mat-icon>
-                                          Delete
-                                    </button>
-                              </td>
                         </tr>
                         }
                   </tbody>
             </table>
+            <app-user-details [selectedUser]="selectedUser()" (deleteUser)="deleteUser($event)" />
       </div>
 </div>

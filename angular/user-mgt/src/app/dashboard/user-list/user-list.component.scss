@@ -1,11 +1,9 @@
 .container {
       font-family: Arial, sans-serif;
       height: calc(100vh - 85px);
-      // padding: 10px;
 }
 
 .dashboard-container {
-      // box-shadow: 0px 0px 3px gray;
       padding: 10px;
       border-radius: 10px;
 }
@@ -16,18 +14,13 @@
       align-items: center;
       margin: 0px auto;
       max-width: 100%;
-      background-color: #c4cad3;
-
-      .header {
-            margin-left: 20px;
-      }
 }
 
 .table-container {
       margin: 0px auto;
       max-width: 100%;
       background: white;
-      border-radius: 8px;
+      border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
       overflow-x: auto;
 }
@@ -50,6 +43,7 @@ td {
 
 tr:hover {
       background-color: #f1f5f9;
+      cursor: pointer;
 }
 
 button {

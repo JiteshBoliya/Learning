@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../core/service/user.service';
 import { User } from '../../core/models/data.model';
 import { UtilityService } from '../../core/service/utility.service';
+import { UserDetailsComponent } from "../user-details/user-details.component";
 
 @Component({
   selector: 'app-user-list',
@@ -17,12 +18,15 @@ import { UtilityService } from '../../core/service/utility.service';
     NavbarComponent,
     CommonModule,
     MatIconModule,
-    MatButtonModule],
+    MatButtonModule,
+    UserDetailsComponent
+  ],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })
 export class UserListComponent implements OnInit {
   userList = signal<User[]>([]);
+  selectedUser = signal<User | any>(null);
 
   constructor(
     private dialog: MatDialog,
@@ -67,6 +71,10 @@ export class UserListComponent implements OnInit {
         }
       });
     }
+  }
+
+  onSelect(user: any) {
+    this.selectedUser.set(user);
   }
 
 }

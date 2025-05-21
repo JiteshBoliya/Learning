@@ -1,0 +1,59 @@
+.user-detail-container {
+      // padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 4px;
+      flex-grow: 1;
+      // margin-left: 20px;
+}
+
+.user-info {
+      background-color: white;
+      padding: 15px;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.info-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #eee;
+      display: flex;
+}
+
+.info-row:last-child {
+      border-bottom: none;
+}
+
+.label {
+      font-weight: bold;
+      width: 100px;
+}
+
+.value {
+      flex-grow: 1;
+}
+
+.no-selection {
+      color: #6c757d;
+      font-style: italic;
+}
+
+button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: 500;
+      cursor: pointer;
+}
+
+.delete-btn {
+      background-color: #ef4444;
+      color: white !important;
+      display: flex;
+      justify-content: center;
+      align-items: anchor-center;
+      margin-top: 10px;
+}
+
+.delete-btn:hover {
+      background-color: #dc2626;
+}

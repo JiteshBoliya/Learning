@@ -1,0 +1,27 @@
+<div class="user-detail-container">
+      <h2>User Details</h2>
+      @if (selectedUser(); as user) {
+      <div class="user-info">
+            <div class="info-row">
+                  <span class="label">Name:</span>
+                  <span class="value">{{ user.name }}</span>
+            </div>
+            <div class="info-row">
+                  <span class="label">Email:</span>
+                  <span class="value">{{ user.email }}</span>
+            </div>
+            <div class="info-row">
+                  <span class="label">Contact No:</span>
+                  <span class="value">{{ user.contactNo }}</span>
+            </div>
+            <button mat-stroked-button class="delete-btn" (click)="onDelete(user.id)">
+                  <mat-icon>delete</mat-icon>
+                  Delete
+            </button>
+      </div>
+      } @else {
+      <div class="no-selection">
+            Please select a user from the list.
+      </div>
+      }
+</div>
