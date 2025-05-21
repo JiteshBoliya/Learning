@@ -1,7 +1,8 @@
 <app-navbar />
-<div class="dashboard-container">
-      <div class="tab-container">
+<div class="container">
+      <div class="dashboard-container">
             <header class="dashboard-header">
+                  <h2 class="header">User List</h2>
                   <div class="button-container">
                         <button class="add-button" (click)="openAddUserDialog()">+ Add User</button>
                   </div>
@@ -33,7 +34,8 @@
                               <td>
                                     <button mat-stroked-button class="delete" (click)="deleteUser(user.id)">
                                           <mat-icon>delete</mat-icon>
-                                          Delete </button>
+                                          Delete
+                                    </button>
                               </td>
                         </tr>
                         }

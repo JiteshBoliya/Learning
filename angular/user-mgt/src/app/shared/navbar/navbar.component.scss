@@ -1,5 +1,5 @@
 .mat-toolbar {
-      background-color: rgb(114, 114, 114);
+      background-color: rgb(74, 76, 83);
       color: white;
 }
 
@@ -9,16 +9,16 @@
       text-transform: uppercase;
       letter-spacing: 1.25px;
 
-      border-radius: 0px;
+      border-radius: 5px;
       margin: 0px;
-      height: 90%;
+      height: 60%;
       border-color: white !important;
 
       &:hover {
-            background-color: rgb(27, 27, 27) !important;
+            border: 0px;
+            background-color: rgb(33, 34, 37) !important;
+            box-shadow: 0px 0px 2px gray;
       }
-
-
 }
 
 .active-link {

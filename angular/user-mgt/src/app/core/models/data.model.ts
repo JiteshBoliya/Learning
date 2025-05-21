@@ -7,6 +7,6 @@ export interface Admin {
 export interface User {
       id: string,
       name: string,
-      mobileNo: string,
+      contactNo: string,
       email: string
 }

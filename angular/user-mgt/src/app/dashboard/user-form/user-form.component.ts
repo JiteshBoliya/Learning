@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UserService } from '../../core/service/user.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { User } from '../../core/models/data.model';
 
 @Component({
   selector: 'app-add-user',
@@ -16,7 +17,7 @@ export class UserFormComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<UserFormComponent>,
     private userService: UserService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: User
   ) { }
 
   ngOnInit(): void {
@@ -31,8 +32,10 @@ export class UserFormComponent implements OnInit {
     if (this.userForm.valid) {
       if (this.data) {
         this.userService.updateUser(this.data.id, this.userForm.value);
+        this.userService.openSnackBar("User data updated", "Ok");
       } else {
         this.userService.addUser(this.userForm.value);
+        this.userService.openSnackBar("User data Added", "Ok");
       }
       this.dialogRef.close();
     }
