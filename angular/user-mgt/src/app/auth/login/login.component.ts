@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/service/auth.service';
 import { CommonModule } from '@angular/common';
 import { UtilityService } from '../../core/service/utility.service';
+import { LoaderComponent } from "../../shared/loader/loader.component";
 @Component({
   selector: 'app-login',
   standalone: true,

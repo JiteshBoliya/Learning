@@ -5,6 +5,7 @@ import { Admin } from '../models/data.model';
 import * as CryptoJS from 'crypto-js';
 import { addDoc } from 'firebase/firestore';
 import { Router } from '@angular/router';
+import { LoaderService } from './loader.service';
 interface DecodedToken {
   loginId: string;
   username: string;
@@ -19,12 +20,15 @@ export class AuthService {
   private adminRef = collection(this.firestore, 'login');
   private readonly TOKEN_KEY = 'auth_token';
 
+  constructor(private loaderService: LoaderService) { }
+
   isAuthenticated(): boolean {
     return this.isTokenValid();
   }
 
   login(loginData: any) {
     try {
+      this.loaderService.showLoader();
       const { username, password } = loginData;
       const q = query(this.adminRef, where('username', '==', username));
 
@@ -32,6 +36,7 @@ export class AuthService {
         switchMap(querySnapshot => {
           // Check if user exists
           if (querySnapshot.empty) {
+            this.loaderService.hideLoader();
             return throwError(() => new Error('User not found'));
           }
 
@@ -46,9 +51,10 @@ export class AuthService {
           if (isMatch) {
             const token = this.generateToken({ loginId: userData.id, username });
             this.storeToken(token);
+            this.loaderService.hideLoader();
             return of(userData);
           } else {
-            // Password is incorrect
+            this.loaderService.hideLoader();
             return throwError(() => new Error('Invalid password'));
           }
         })
