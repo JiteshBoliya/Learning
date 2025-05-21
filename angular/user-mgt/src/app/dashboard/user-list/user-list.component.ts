@@ -41,33 +41,22 @@ export class UserListComponent implements OnInit {
   openAddUserDialog() {
     this.dialog.open(UserFormComponent, {
       width: '1000px'
-    }).afterClosed().subscribe((res) => {
-      if (res) {
-
-        // this.userList.update(values => {
-        //   return [...values, res];
-        // });
-        this.openSnackBar("User data Added", "Ok");
-      }
     })
+    this.openSnackBar("User data Added", "Ok");
   }
 
   openUpdateUserDialog(data: any) {
     this.dialog.open(UserFormComponent, {
       width: '1000px'
       , data
-    }).afterClosed().subscribe((res) => {
-      if (res) {
-        this.openSnackBar("User data updated", "Ok");
-      }
-    })
+    });
+    this.openSnackBar("User data updated", "Ok");
   }
 
   deleteUser(id: string) {
     if (confirm("Sure you want to delete..?")) {
-      this.userService.deleteUser(id).subscribe((res) => {
-        this.openSnackBar("User data deleted", "Ok");
-      })
+      this.userService.deleteUser(id);
+      this.openSnackBar("User data deleted", "Ok");
     }
   }
 

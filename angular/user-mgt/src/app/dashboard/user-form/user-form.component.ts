@@ -25,20 +25,16 @@ export class UserFormComponent implements OnInit {
       contactNo: new FormControl(this.data ? this.data.contactNo : '', [Validators.required]),
       email: new FormControl(this.data ? this.data.email : '', [Validators.required]),
     });
-
   }
 
   onSubmit() {
     if (this.userForm.valid) {
       if (this.data) {
-        this.userService.updateUser(this.data.id, this.userForm.value).subscribe((res) => {
-          this.dialogRef.close(res);
-        });
+        this.userService.updateUser(this.data.id, this.userForm.value);
       } else {
-        this.userService.addUser(this.userForm.value).subscribe((res) => {
-          this.dialogRef.close(res);
-        })
+        this.userService.addUser(this.userForm.value);
       }
+      this.dialogRef.close();
     }
   }
 

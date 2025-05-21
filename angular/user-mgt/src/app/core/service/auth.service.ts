@@ -18,11 +18,9 @@ export class AuthService {
   private firestore: Firestore = inject(Firestore);
   private adminRef = collection(this.firestore, 'login');
   private readonly TOKEN_KEY = 'auth_token';
-  private isLoggedIn = false;
 
   isAuthenticated(): boolean {
-    // return this.isTokenValid();
-    return this.isLoggedIn;
+    return this.isTokenValid();
   }
 
   login(loginData: any) {
@@ -48,7 +46,6 @@ export class AuthService {
           if (isMatch) {
             const token = this.generateToken({ loginId: userData.id, username });
             this.storeToken(token);
-            this.isLoggedIn = true;
             return of(userData);
           } else {
             // Password is incorrect
@@ -75,7 +72,6 @@ export class AuthService {
   }
 
   logout() {
-    this.isLoggedIn = false;
     localStorage.clear();
   }
 
@@ -105,31 +101,34 @@ export class AuthService {
     localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  // private isTokenValid(): boolean {
-  //   const token = localStorage.getItem(this.TOKEN_KEY);
+  getToken() {
+    return localStorage.getItem(this.TOKEN_KEY);
+  }
 
-  //   if (!token) {
-  //     return false;
-  //   }
-  //   try {
-  //     const decodedToken = this.decodeToken(token);
-  //     return decodedToken.exp * 1000 > Date.now();
-  //   } catch (error) {
-  //     console.error('Token validation error', error);
-  //     return false;
-  //   }
-  // }
+  private isTokenValid(): boolean {
+    const token = this.getToken();
+    if (!token) {
+      return false;
+    }
+    try {
+      const decodedToken = this.decodeToken(token);
+      return decodedToken.exp * 1000 > Date.now();
+    } catch (error) {
+      console.error('Token validation error', error);
+      return false;
+    }
+  }
 
-  // private decodeToken(token: string): DecodedToken {
-  //   if (!token) {
-  //     throw new Error('No token found');
-  //   }
+  decodeToken(token: string): DecodedToken {
+    if (!token) {
+      throw new Error('No token found');
+    }
 
-  //   try {
-  //     return JSON.parse(atob(token));
-  //   } catch (error) {
-  //     console.error('Token decoding failed', error);
-  //     throw new Error('Invalid token format');
-  //   }
-  // }
+    try {
+      return JSON.parse(atob(token));
+    } catch (error) {
+      console.error('Token decoding failed', error);
+      throw new Error('Invalid token format');
+    }
+  }
 }
