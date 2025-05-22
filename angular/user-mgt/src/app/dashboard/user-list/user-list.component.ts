@@ -64,6 +64,7 @@ export class UserListComponent implements OnInit {
       this.userService.deleteUser(id).subscribe({
         next: () => {
           this.utilityService.openSnackBar("User data deleted", 'success');
+          this.selectedUser.set(null);
         },
         error: (err) => {
           console.error('Failed to delete User:', err.message);
